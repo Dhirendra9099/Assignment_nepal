@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { BlogCard } from "@/components/cards/BlogCard";
 import { CollegeCard } from "@/components/cards/CollegeCard";
@@ -89,6 +90,26 @@ export default async function Home() {
         <SearchPanel items={searchItems} />
       </section>
 
+      <section className="mx-auto max-w-7xl px-4 py-10 md:px-6">
+        <div className="grid gap-5 lg:grid-cols-3">
+          <VisualFeature
+            image="/images/directory-campus.svg"
+            title="College directory visuals"
+            text="Compare colleges, university partners, cities, programmes, and verification notes through a cleaner research-first interface."
+          />
+          <VisualFeature
+            image="/images/services-liquid-icons.svg"
+            title="3D study-support system"
+            text="Explore tutoring, planning, referencing, proofreading, and draft feedback through a premium glass education interface."
+          />
+          <VisualFeature
+            image="/images/resources-visual.svg"
+            title="Academic resource hub"
+            text="Read practical guides for study skills, module planning, referencing, academic integrity, and career decisions."
+          />
+        </div>
+      </section>
+
       <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
         <SectionHeader
           title="Featured foreign-affiliated colleges"
@@ -134,6 +155,26 @@ export default async function Home() {
           title="How Assignment Nepal helps"
           description="Every service is designed to improve your own learning, writing, planning, referencing, and confidence while respecting academic integrity."
         />
+        <div className="visual-split mb-8 grid items-center gap-8 overflow-hidden rounded-[2rem] border border-white/12 bg-white/6 p-5 md:grid-cols-[0.9fr_1.1fr] md:p-7">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem]">
+            <Image
+              src="/images/services-liquid-icons.svg"
+              alt="3D liquid-glass icons for Assignment Nepal academic support services"
+              fill
+              sizes="(min-width: 768px) 45vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Ethical support cockpit</p>
+            <h3 className="mt-3 text-2xl font-black leading-tight text-white md:text-4xl">
+              Guidance that improves your own work, not a shortcut around learning.
+            </h3>
+            <p className="mt-4 text-sm leading-7 text-slate-300">
+              The service flow is built around explanation, planning, research direction, proofreading, feedback, and referencing support, with academic integrity visible at every step.
+            </p>
+          </div>
+        </div>
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {services.slice(0, 9).map((service: any) => (
             <ServiceCard key={service.slug} service={service} />
@@ -200,5 +241,17 @@ export default async function Home() {
         </div>
       </section>
     </>
+  );
+}
+
+function VisualFeature({ image, title, text }: { image: string; title: string; text: string }) {
+  return (
+    <article className="visual-feature depth-lift">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-[1.35rem]">
+        <Image src={image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" loading="eager" />
+      </div>
+      <h2 className="mt-4 text-lg font-bold text-white">{title}</h2>
+      <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>
+    </article>
   );
 }

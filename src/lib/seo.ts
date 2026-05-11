@@ -8,7 +8,7 @@ type SeoInput = {
   image?: string;
 };
 
-export function createMetadata({ title, description, path = "/", image = "/og.svg" }: SeoInput): Metadata {
+export function createMetadata({ title, description, path = "/", image = "/images/og-assignment-nepal.svg" }: SeoInput): Metadata {
   const url = new URL(path, SITE_URL).toString();
   const imageUrl = new URL(image, SITE_URL).toString();
 

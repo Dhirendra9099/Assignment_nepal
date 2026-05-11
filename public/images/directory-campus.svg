@@ -1,0 +1,25 @@
+<svg width="1000" height="700" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Foreign-affiliated college directory visual</title>
+  <desc id="desc">A futuristic abstract campus directory with glass buildings, programme tags, and Nepal-focused education styling.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1000" y2="700" gradientUnits="userSpaceOnUse"><stop stop-color="#08183D"/><stop offset="1" stop-color="#050816"/></linearGradient>
+    <linearGradient id="glass" x1="144" y1="83" x2="828" y2="594" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF" stop-opacity=".3"/><stop offset=".55" stop-color="#7DEEFF" stop-opacity=".1"/><stop offset="1" stop-color="#9B7BFF" stop-opacity=".16"/></linearGradient>
+    <linearGradient id="accent" x1="101" y1="96" x2="902" y2="619" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset=".45" stop-color="#8B8CFF"/><stop offset="1" stop-color="#FF77C8"/></linearGradient>
+    <filter id="shadow" x="0" y="0" width="1000" height="700" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="32" stdDeviation="34" flood-color="#00091D" flood-opacity=".58"/></filter>
+  </defs>
+  <rect width="1000" height="700" rx="42" fill="url(#bg)"/>
+  <path d="M83 495C203 389 324 398 438 497C557 601 690 594 813 465C884 390 930 384 954 402" stroke="url(#accent)" stroke-opacity=".3" stroke-width="38" stroke-linecap="round"/>
+  <g filter="url(#shadow)">
+    <path d="M170 456L250 240L369 456H170Z" fill="url(#glass)" stroke="white" stroke-opacity=".24" stroke-width="2"/>
+    <path d="M332 456L458 148L595 456H332Z" fill="url(#glass)" stroke="white" stroke-opacity=".24" stroke-width="2"/>
+    <path d="M570 456L666 224L817 456H570Z" fill="url(#glass)" stroke="white" stroke-opacity=".24" stroke-width="2"/>
+    <rect x="170" y="443" width="650" height="84" rx="34" fill="url(#glass)" stroke="white" stroke-opacity=".22" stroke-width="2"/>
+    <rect x="248" y="498" width="122" height="74" rx="22" fill="#FFFFFF" fill-opacity=".12" stroke="white" stroke-opacity=".2"/>
+    <rect x="412" y="498" width="122" height="74" rx="22" fill="#22D3EE" fill-opacity=".14" stroke="white" stroke-opacity=".2"/>
+    <rect x="576" y="498" width="122" height="74" rx="22" fill="#FFFFFF" fill-opacity=".12" stroke="white" stroke-opacity=".2"/>
+    <rect x="702" y="145" width="182" height="96" rx="30" fill="url(#glass)" stroke="white" stroke-opacity=".24" stroke-width="2"/>
+    <path d="M742 190H845M742 217H813" stroke="white" stroke-opacity=".5" stroke-width="11" stroke-linecap="round"/>
+    <rect x="118" y="140" width="194" height="104" rx="34" fill="url(#glass)" stroke="white" stroke-opacity=".24" stroke-width="2"/>
+    <path d="M157 184H268M157 214H229" stroke="#7DEEFF" stroke-opacity=".74" stroke-width="12" stroke-linecap="round"/>
+  </g>
+</svg>

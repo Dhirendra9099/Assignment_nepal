@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, CalendarCheck, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { GlassCard } from "@/components/ui/GlassCard";
@@ -7,8 +8,15 @@ import { formatDate } from "@/lib/utils";
 export function CollegeCard({ college }: { college: any }) {
   return (
     <GlassCard as="article" className="flex h-full flex-col">
-      <div className="mb-5 h-36 rounded-[1.25rem] border border-white/10 bg-gradient-to-br from-cyan-300/18 via-violet-300/14 to-pink-300/10 p-4">
-        <div className="h-full rounded-2xl border border-white/12 bg-slate-950/28" />
+      <div className="card-media depth-lift mb-5">
+        <Image
+          src="/images/directory-campus.svg"
+          alt={`Abstract 3D directory visual for ${college.name}`}
+          fill
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover"
+        />
+        <div className="card-media-label">{college.city}</div>
       </div>
       <div className="flex items-center gap-2 text-sm text-cyan-100">
         <MapPin className="h-4 w-4" />

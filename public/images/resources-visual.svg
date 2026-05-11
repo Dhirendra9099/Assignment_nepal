@@ -1,0 +1,23 @@
+<svg width="1000" height="700" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Academic resources visual</title>
+  <desc id="desc">A premium 3D visual of guides, reference notes, and study resources arranged in glass panels.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1000" y2="700" gradientUnits="userSpaceOnUse"><stop stop-color="#071735"/><stop offset="1" stop-color="#050816"/></linearGradient>
+    <linearGradient id="glass" x1="156" y1="83" x2="835" y2="603" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFFFF" stop-opacity=".3"/><stop offset=".5" stop-color="#7DEEFF" stop-opacity=".11"/><stop offset="1" stop-color="#FF77C8" stop-opacity=".14"/></linearGradient>
+    <linearGradient id="accent" x1="108" y1="90" x2="890" y2="608" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset=".5" stop-color="#9B7BFF"/><stop offset="1" stop-color="#FF77C8"/></linearGradient>
+    <filter id="shadow" x="0" y="0" width="1000" height="700" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="34" stdDeviation="34" flood-color="#00091D" flood-opacity=".58"/></filter>
+  </defs>
+  <rect width="1000" height="700" rx="42" fill="url(#bg)"/>
+  <path d="M95 512C230 391 347 421 462 512C580 606 705 606 836 458C907 378 949 388 967 408" stroke="url(#accent)" stroke-opacity=".29" stroke-width="42" stroke-linecap="round"/>
+  <g filter="url(#shadow)">
+    <rect x="196" y="143" width="260" height="392" rx="42" fill="url(#glass)" stroke="white" stroke-opacity=".24" stroke-width="2" transform="rotate(-7 196 143)"/>
+    <rect x="385" y="99" width="292" height="424" rx="46" fill="url(#glass)" stroke="white" stroke-opacity=".25" stroke-width="2" transform="rotate(4 385 99)"/>
+    <rect x="575" y="177" width="242" height="338" rx="42" fill="url(#glass)" stroke="white" stroke-opacity=".23" stroke-width="2" transform="rotate(10 575 177)"/>
+    <path d="M290 234H404M284 286H430M278 338H381" stroke="white" stroke-opacity=".48" stroke-width="15" stroke-linecap="round"/>
+    <path d="M443 221H604M447 277H649M452 334H601M456 391H626" stroke="#DDFBFF" stroke-opacity=".56" stroke-width="16" stroke-linecap="round"/>
+    <path d="M646 314H760M640 366H734M636 419H759" stroke="white" stroke-opacity=".48" stroke-width="15" stroke-linecap="round"/>
+    <rect x="369" y="487" width="300" height="66" rx="26" fill="#22D3EE" fill-opacity=".2" stroke="white" stroke-opacity=".18"/>
+  </g>
+  <circle cx="812" cy="135" r="44" fill="#FF77C8" fill-opacity=".2" stroke="white" stroke-opacity=".22" stroke-width="2"/>
+  <circle cx="151" cy="555" r="39" fill="#22D3EE" fill-opacity=".22" stroke="white" stroke-opacity=".22" stroke-width="2"/>
+</svg>

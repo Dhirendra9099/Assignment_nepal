@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   BookOpenCheck,
   CalendarCheck,
@@ -34,8 +35,17 @@ export function ServiceCard({ service }: { service: any }) {
   const Icon = icons[service.icon] || GraduationCap;
   return (
     <GlassCard as="article" className="h-full">
-      <div className="mb-5 inline-flex rounded-2xl bg-gradient-to-br from-cyan-300/24 to-violet-300/18 p-3 text-cyan-100">
-        <Icon className="h-6 w-6" />
+      <div className="service-media depth-lift mb-5">
+        <Image
+          src="/images/services-liquid-icons.svg"
+          alt=""
+          fill
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover"
+        />
+        <div className="service-media-icon">
+          <Icon className="h-6 w-6" />
+        </div>
       </div>
       <h3 className="text-xl font-bold text-white">{service.title}</h3>
       <p className="mt-3 text-sm leading-6 text-slate-300">{service.shortDescription}</p>

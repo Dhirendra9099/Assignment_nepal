@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ServiceCard } from "@/components/cards/ServiceCard";
 import { TrustBanner } from "@/components/site/TrustBanner";
 import { GlassCard } from "@/components/ui/GlassCard";
@@ -40,11 +41,25 @@ export default async function ServicesPage() {
   return (
     <>
       <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
-        <SectionHeader
-          as="h1"
-          title="Services"
-          description="Liquid-glass academic support built around tutoring, study guidance, feedback, editing, referencing, and independent learning."
-        />
+        <div className="visual-split mb-10 grid items-center gap-8 overflow-hidden rounded-[2rem] border border-white/12 bg-white/6 p-5 md:grid-cols-[1fr_0.95fr] md:p-8">
+          <div>
+            <SectionHeader
+              as="h1"
+              title="Services"
+              description="Liquid-glass academic support built around tutoring, study guidance, feedback, editing, referencing, and independent learning."
+            />
+          </div>
+          <div className="depth-lift relative aspect-[16/10] overflow-hidden rounded-[1.5rem]">
+            <Image
+              src="/images/services-liquid-icons.svg"
+              alt="3D liquid-glass icons representing Assignment Nepal tutoring, proofreading, planning, referencing, and research guidance services"
+              fill
+              sizes="(min-width: 768px) 45vw, 100vw"
+              className="object-cover"
+              priority
+            />
+          </div>
+        </div>
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service: any) => (
             <ServiceCard key={service.slug} service={service} />

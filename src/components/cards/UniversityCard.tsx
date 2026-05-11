@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Globe2 } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Badge } from "@/components/ui/Badge";
@@ -7,8 +8,17 @@ import { formatDate } from "@/lib/utils";
 export function UniversityCard({ university }: { university: any }) {
   return (
     <GlassCard as="article" className="h-full">
-      <div className="mb-4 inline-flex rounded-2xl bg-cyan-300/14 p-3 text-cyan-100">
-        <Globe2 className="h-6 w-6" />
+      <div className="card-media depth-lift mb-5">
+        <Image
+          src="/images/directory-campus.svg"
+          alt={`Abstract 3D foreign university partner visual for ${university.name}`}
+          fill
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover"
+        />
+        <div className="card-media-icon">
+          <Globe2 className="h-5 w-5" />
+        </div>
       </div>
       <h3 className="text-xl font-bold text-white">{university.name}</h3>
       <p className="mt-2 text-sm font-medium text-cyan-100">{university.country}</p>

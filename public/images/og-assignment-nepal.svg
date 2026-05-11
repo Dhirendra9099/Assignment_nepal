@@ -1,0 +1,26 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Assignment Nepal social preview</title>
+  <desc id="desc">Open Graph banner for Assignment Nepal with premium liquid-glass academic support visuals.</desc>
+  <rect width="1200" height="630" fill="#050816"/>
+  <defs>
+    <linearGradient id="a" x1="76" y1="55" x2="1125" y2="590" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE"/><stop offset=".52" stop-color="#9B7BFF"/><stop offset="1" stop-color="#FF77C8"/></linearGradient>
+    <linearGradient id="g" x1="710" y1="94" x2="1096" y2="506" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity=".25"/><stop offset=".5" stop-color="#7DEEFF" stop-opacity=".1"/><stop offset="1" stop-color="#FF77C8" stop-opacity=".16"/></linearGradient>
+    <filter id="s" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="28" stdDeviation="34" flood-color="#00091D" flood-opacity=".62"/></filter>
+  </defs>
+  <circle cx="218" cy="123" r="208" fill="#22D3EE" fill-opacity=".18"/>
+  <circle cx="1014" cy="84" r="245" fill="#9B7BFF" fill-opacity=".18"/>
+  <circle cx="820" cy="595" r="285" fill="#FF77C8" fill-opacity=".11"/>
+  <path d="M78 457C221 331 364 337 497 454C642 581 791 559 951 390C1040 296 1102 303 1152 342" stroke="url(#a)" stroke-opacity=".34" stroke-width="50" stroke-linecap="round"/>
+  <g filter="url(#s)">
+    <rect x="742" y="125" width="286" height="333" rx="48" fill="url(#g)" stroke="white" stroke-opacity=".23" stroke-width="2"/>
+    <rect x="778" y="176" width="214" height="136" rx="28" fill="#050816" fill-opacity=".66" stroke="white" stroke-opacity=".15" stroke-width="2"/>
+    <path d="M806 276L859 231L908 262L965 211" stroke="#DDFBFF" stroke-opacity=".58" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M808 358H963M808 400H915" stroke="white" stroke-opacity=".45" stroke-width="14" stroke-linecap="round"/>
+    <circle cx="1030" cy="176" r="46" fill="#FF77C8" fill-opacity=".22" stroke="white" stroke-opacity=".22" stroke-width="2"/>
+    <circle cx="739" cy="457" r="42" fill="#22D3EE" fill-opacity=".22" stroke="white" stroke-opacity=".22" stroke-width="2"/>
+  </g>
+  <text x="86" y="216" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="900">Assignment Nepal</text>
+  <text x="90" y="296" fill="#DDEBFF" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="600">Academic support for students in</text>
+  <text x="90" y="343" fill="#DDEBFF" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="600">foreign-affiliated colleges</text>
+  <text x="91" y="468" fill="#7DEEFF" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800">Tutoring • Feedback • Referencing • Study guidance</text>
+</svg>

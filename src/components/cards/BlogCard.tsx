@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { GlassCard } from "@/components/ui/GlassCard";
@@ -7,7 +8,15 @@ import { formatDate } from "@/lib/utils";
 export function BlogCard({ post }: { post: any }) {
   return (
     <GlassCard as="article" className="h-full">
-      <div className="mb-4 h-32 rounded-[1.25rem] border border-white/10 bg-gradient-to-br from-violet-300/18 via-cyan-300/12 to-pink-300/10" />
+      <div className="card-media depth-lift mb-4">
+        <Image
+          src="/images/resources-visual.svg"
+          alt={`3D academic resource visual for ${post.title}`}
+          fill
+          sizes="(min-width: 768px) 33vw, 100vw"
+          className="object-cover"
+        />
+      </div>
       {post.category ? <Badge>{post.category}</Badge> : null}
       <h3 className="mt-4 text-xl font-bold leading-snug text-white">{post.title}</h3>
       <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-300">{post.excerpt}</p>

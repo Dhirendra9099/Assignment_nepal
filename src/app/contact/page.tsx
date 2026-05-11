@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Mail, MapPin, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { GlassCard } from "@/components/ui/GlassCard";
@@ -20,6 +21,16 @@ export default function ContactPage() {
           <p className="mt-5 text-lg leading-8 text-slate-300">
             Tell us what module, subject, brief, draft, reference style, or study challenge you want to understand. We will respond with ethical support options.
           </p>
+          <div className="depth-lift mt-7 overflow-hidden rounded-[2rem] border border-white/12 bg-white/6">
+            <Image
+              src="/images/contact-support.svg"
+              alt="3D liquid-glass contact support visual with phone, enquiry form, and chat panels"
+              width={1000}
+              height={760}
+              className="h-auto w-full"
+              priority
+            />
+          </div>
           <div className="mt-8 grid gap-4">
             <GlassCard className="flex items-start gap-3">
               <Mail className="mt-1 h-5 w-5 text-cyan-200" />
