@@ -47,11 +47,15 @@ export async function POST(request: NextRequest) {
     }));
 
   let dbSaved = false;
-  try {
-    await prisma.correctionRequest.create({ data: correctionData });
-    dbSaved = true;
-  } catch {
-    console.info("Correction request was not saved because the database is not configured or unavailable.");
+  if (process.env.DATABASE_URL) {
+    try {
+      await prisma.correctionRequest.create({ data: correctionData });
+      dbSaved = true;
+    } catch {
+      console.info("Correction request was not saved because the database is unavailable.");
+    }
+  } else {
+    console.info("Correction request database storage skipped because DATABASE_URL is not configured.");
   }
 
   if (!emailSent && !dbSaved) {

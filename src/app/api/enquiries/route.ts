@@ -60,11 +60,15 @@ export async function POST(request: NextRequest) {
     }));
 
   let dbSaved = false;
-  try {
-    await prisma.enquiry.create({ data: enquiryData });
-    dbSaved = true;
-  } catch {
-    console.info("Enquiry was not saved because the database is not configured or unavailable.");
+  if (process.env.DATABASE_URL) {
+    try {
+      await prisma.enquiry.create({ data: enquiryData });
+      dbSaved = true;
+    } catch {
+      console.info("Enquiry was not saved because the database is unavailable.");
+    }
+  } else {
+    console.info("Enquiry database storage skipped because DATABASE_URL is not configured.");
   }
 
   if (!emailSent && !dbSaved) {
