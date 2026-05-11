@@ -29,10 +29,30 @@ Open `http://localhost:3000`.
 
 Default seeded admin:
 
-- Email: value of `ADMIN_EMAIL`, default `admin@assignmentnepal.com`
+- Email: value of `ADMIN_EMAIL`, default `assignmentnepal63@gmail.com`
 - Password: value of `ADMIN_PASSWORD`, default `ChangeMe123!`
 
 Change these before production.
+
+## Contact Email
+
+The public contact email and WhatsApp number are:
+
+- Email: `assignmentnepal63@gmail.com`
+- Phone / WhatsApp: `9744998670`
+
+For live email delivery on Vercel, configure Gmail SMTP:
+
+```env
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT="465"
+SMTP_USER="assignmentnepal63@gmail.com"
+SMTP_PASS="your-gmail-app-password"
+SMTP_FROM="Assignment Nepal <assignmentnepal63@gmail.com>"
+ADMIN_NOTIFICATION_EMAIL="assignmentnepal63@gmail.com"
+```
+
+Use a Gmail app password, not the normal Gmail account password.
 
 ## Key Routes
 

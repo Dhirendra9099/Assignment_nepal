@@ -24,47 +24,53 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Thanks. Your enquiry has been received." });
   }
 
-  let enquiry;
-  try {
-    enquiry = await prisma.enquiry.create({
-      data: {
-        fullName: sanitizePlainText(data.fullName, 120),
-        email: data.email.toLowerCase(),
-        phone: sanitizePlainText(data.phone || "", 24),
-        collegeName: sanitizePlainText(data.collegeName || "", 160),
-        programmeName: sanitizePlainText(data.programmeName || "", 180),
-        subject: sanitizePlainText(data.subject || "", 180),
-        supportType: sanitizePlainText(data.supportType, 120),
-        message: sanitizePlainText(data.message, 3000),
-        preferredContactMethod: sanitizePlainText(data.preferredContactMethod || "", 80),
-        consentToContact: data.consentToContact,
-        consentToPrivacyPolicy: data.consentToPrivacyPolicy,
-        academicIntegrityAccepted: data.academicIntegrityAccepted,
-      },
-    });
-  } catch {
-    return NextResponse.json(
-      { error: "Database is not configured. Please set DATABASE_URL and run the Prisma setup before accepting enquiries." },
-      { status: 503 },
-    );
-  }
+  const enquiryData = {
+    fullName: sanitizePlainText(data.fullName, 120),
+    email: data.email.toLowerCase(),
+    phone: sanitizePlainText(data.phone || "", 24),
+    collegeName: sanitizePlainText(data.collegeName || "", 160),
+    programmeName: sanitizePlainText(data.programmeName || "", 180),
+    subject: sanitizePlainText(data.subject || "", 180),
+    supportType: sanitizePlainText(data.supportType, 120),
+    message: sanitizePlainText(data.message, 3000),
+    preferredContactMethod: sanitizePlainText(data.preferredContactMethod || "", 80),
+    consentToContact: data.consentToContact,
+    consentToPrivacyPolicy: data.consentToPrivacyPolicy,
+    academicIntegrityAccepted: data.academicIntegrityAccepted,
+  };
 
-  await sendAdminNotification({
-    subject: `New Assignment Nepal enquiry: ${enquiry.supportType}`,
-    replyTo: enquiry.email,
+  const emailSent = await sendAdminNotification({
+    subject: `New Assignment Nepal enquiry: ${enquiryData.supportType}`,
+    replyTo: enquiryData.email,
     text: [
-      `Name: ${enquiry.fullName}`,
-      `Email: ${enquiry.email}`,
-      `Phone: ${enquiry.phone || "Not provided"}`,
-      `College: ${enquiry.collegeName || "Not provided"}`,
-      `Programme: ${enquiry.programmeName || "Not provided"}`,
-      `Subject: ${enquiry.subject || "Not provided"}`,
-      `Support type: ${enquiry.supportType}`,
-      `Message: ${enquiry.message}`,
+      `Name: ${enquiryData.fullName}`,
+      `Email: ${enquiryData.email}`,
+      `Phone: ${enquiryData.phone || "Not provided"}`,
+      `College: ${enquiryData.collegeName || "Not provided"}`,
+      `Programme: ${enquiryData.programmeName || "Not provided"}`,
+      `Subject: ${enquiryData.subject || "Not provided"}`,
+      `Support type: ${enquiryData.supportType}`,
+      `Preferred contact method: ${enquiryData.preferredContactMethod || "Not provided"}`,
+      `Message: ${enquiryData.message}`,
       "",
       MANDATORY_DISCLAIMER,
     ].join("\n"),
   });
+
+  let dbSaved = false;
+  try {
+    await prisma.enquiry.create({ data: enquiryData });
+    dbSaved = true;
+  } catch {
+    console.info("Enquiry was not saved because the database is not configured or unavailable.");
+  }
+
+  if (!emailSent && !dbSaved) {
+    return NextResponse.json(
+      { error: "Email is not configured yet. Please try again after Assignment Nepal enables email notifications." },
+      { status: 503 },
+    );
+  }
 
   return NextResponse.json({
     message: "Thanks. Your enquiry has been received. We will respond with ethical study-support options.",

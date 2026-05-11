@@ -508,7 +508,7 @@ export const policyPages = [
     slug: "privacy-policy",
     version: "1.0",
     content:
-      "We collect enquiry information such as name, email, phone, college, programme, subject, message, and consent choices so we can respond to requests. We use data only for enquiry handling, service communication, quality improvement, security, and legal compliance. We retain data only as needed for those purposes. Users can request correction or deletion where legally available. We use reasonable security practices and may use cookies or analytics to improve the site. Contact hello@assignmentnepal.com for deletion or correction requests.",
+      "We collect enquiry information such as name, email, phone, college, programme, subject, message, and consent choices so we can respond to requests. We use data only for enquiry handling, service communication, quality improvement, security, and legal compliance. We retain data only as needed for those purposes. Users can request correction or deletion where legally available. We use reasonable security practices and may use cookies or analytics to improve the site. Contact assignmentnepal63@gmail.com for deletion or correction requests.",
   },
 ];
 

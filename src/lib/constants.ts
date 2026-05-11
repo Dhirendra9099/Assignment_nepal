@@ -6,8 +6,8 @@ export const SITE_URL =
     : process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000");
-export const CONTACT_EMAIL = "hello@assignmentnepal.com";
-export const WHATSAPP_NUMBER = "+9779800000000";
+export const CONTACT_EMAIL = "assignmentnepal63@gmail.com";
+export const WHATSAPP_NUMBER = "9744998670";
 
 export const MANDATORY_DISCLAIMER =
   "Assignment Nepal provides tutoring, study guidance, editing, feedback, referencing help, and academic support. We do not complete graded assessments, exams, coursework, or assignments for submission on behalf of students.";

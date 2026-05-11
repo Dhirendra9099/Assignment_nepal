@@ -23,36 +23,41 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Thanks. Your correction request has been received." });
   }
 
-  let correction;
+  const correctionData = {
+    pageType: sanitizePlainText(data.pageType, 100),
+    pageUrl: sanitizePlainText(data.pageUrl, 500),
+    requesterName: sanitizePlainText(data.requesterName, 120),
+    requesterEmail: data.requesterEmail.toLowerCase(),
+    correctionDetails: sanitizePlainText(data.correctionDetails, 4000),
+    sourceUrl: sanitizePlainText(data.sourceUrl || "", 500),
+  };
+
+  const emailSent = await sendAdminNotification({
+    subject: `Correction request: ${correctionData.pageType}`,
+    replyTo: correctionData.requesterEmail,
+    text: [
+      `Requester: ${correctionData.requesterName}`,
+      `Email: ${correctionData.requesterEmail}`,
+      `Page: ${correctionData.pageUrl}`,
+      `Source: ${correctionData.sourceUrl || "Not provided"}`,
+      `Details: ${correctionData.correctionDetails}`,
+    ].join("\n"),
+  });
+
+  let dbSaved = false;
   try {
-    correction = await prisma.correctionRequest.create({
-      data: {
-        pageType: sanitizePlainText(data.pageType, 100),
-        pageUrl: sanitizePlainText(data.pageUrl, 500),
-        requesterName: sanitizePlainText(data.requesterName, 120),
-        requesterEmail: data.requesterEmail.toLowerCase(),
-        correctionDetails: sanitizePlainText(data.correctionDetails, 4000),
-        sourceUrl: sanitizePlainText(data.sourceUrl || "", 500),
-      },
-    });
+    await prisma.correctionRequest.create({ data: correctionData });
+    dbSaved = true;
   } catch {
+    console.info("Correction request was not saved because the database is not configured or unavailable.");
+  }
+
+  if (!emailSent && !dbSaved) {
     return NextResponse.json(
-      { error: "Database is not configured. Please set DATABASE_URL and run the Prisma setup before accepting correction requests." },
+      { error: "Email is not configured yet. Please try again after Assignment Nepal enables email notifications." },
       { status: 503 },
     );
   }
-
-  await sendAdminNotification({
-    subject: `Correction request: ${correction.pageType}`,
-    replyTo: correction.requesterEmail,
-    text: [
-      `Requester: ${correction.requesterName}`,
-      `Email: ${correction.requesterEmail}`,
-      `Page: ${correction.pageUrl}`,
-      `Source: ${correction.sourceUrl || "Not provided"}`,
-      `Details: ${correction.correctionDetails}`,
-    ].join("\n"),
-  });
 
   return NextResponse.json({
     message: "Thanks. Your correction request has been received and will be reviewed before any update is published.",

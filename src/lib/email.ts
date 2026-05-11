@@ -14,7 +14,7 @@ function hasSmtpConfig() {
 export async function sendAdminNotification(input: MailInput) {
   if (!hasSmtpConfig()) {
     console.info(`[${SITE_NAME}] Email not sent because SMTP is not configured: ${input.subject}`);
-    return;
+    return false;
   }
 
   const transporter = nodemailer.createTransport({
@@ -27,11 +27,17 @@ export async function sendAdminNotification(input: MailInput) {
     },
   });
 
-  await transporter.sendMail({
-    from: process.env.SMTP_FROM || `${SITE_NAME} <${CONTACT_EMAIL}>`,
-    to: process.env.ADMIN_NOTIFICATION_EMAIL || process.env.ADMIN_EMAIL,
-    subject: input.subject,
-    text: `${input.text}\n\n${MANDATORY_DISCLAIMER}`,
-    replyTo: input.replyTo,
-  });
+  try {
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || `${SITE_NAME} <${CONTACT_EMAIL}>`,
+      to: process.env.ADMIN_NOTIFICATION_EMAIL || CONTACT_EMAIL,
+      subject: input.subject,
+      text: `${input.text}\n\n${MANDATORY_DISCLAIMER}`,
+      replyTo: input.replyTo,
+    });
+    return true;
+  } catch (error) {
+    console.error(`[${SITE_NAME}] Email notification failed`, error);
+    return false;
+  }
 }
