@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { MANDATORY_DISCLAIMER } from "@/lib/constants";
+import { submitToFormSubmit } from "@/lib/formsubmit-client";
 
 export function CorrectionRequestForm() {
   const [state, setState] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -10,20 +11,60 @@ export function CorrectionRequestForm() {
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     setState("submitting");
     setMessage("");
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    if (payload.website) {
+      setState("success");
+      setMessage("Thanks. Your correction request has been received.");
+      form.reset();
+      return;
+    }
+
+    try {
+      await submitToFormSubmit({
+        subject: `Correction request: ${textValue(payload.pageType)}`,
+        replyTo: textValue(payload.requesterEmail),
+        fields: {
+          Name: textValue(payload.requesterName),
+          Email: textValue(payload.requesterEmail),
+          "Page type": textValue(payload.pageType),
+          "Page URL": textValue(payload.pageUrl),
+          "Source URL": textValue(payload.sourceUrl),
+        },
+        messageLines: [
+          `Requester: ${textValue(payload.requesterName)}`,
+          `Email: ${textValue(payload.requesterEmail)}`,
+          `Page type: ${textValue(payload.pageType)}`,
+          `Page URL: ${textValue(payload.pageUrl)}`,
+          `Source URL: ${textValue(payload.sourceUrl) || "Not provided"}`,
+          `Details: ${textValue(payload.correctionDetails)}`,
+        ],
+      });
+
+      void storeCorrectionRequest(payload);
+      setState("success");
+      setMessage("Thanks. Your correction request has been received and will be reviewed before any update is published.");
+      form.reset();
+      return;
+    } catch {
+      // If the browser-side FormSubmit request fails, try the server fallback.
+    }
+
     const response = await fetch("/api/correction-requests", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(formData.entries())),
+      body: JSON.stringify(payload),
     });
     const data = await response.json();
     if (response.ok) {
       setState("success");
       setMessage(data.message);
-      event.currentTarget.reset();
+      form.reset();
     } else {
       setState("error");
       setMessage(data.error || "Please check the form and try again.");
@@ -62,6 +103,21 @@ export function CorrectionRequestForm() {
       ) : null}
     </form>
   );
+}
+
+async function storeCorrectionRequest(payload: Record<string, FormDataEntryValue>) {
+  await fetch("/api/correction-requests", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-assignment-nepal-notification": "formsubmit",
+    },
+    body: JSON.stringify(payload),
+  }).catch(() => undefined);
+}
+
+function textValue(value: unknown) {
+  return typeof value === "string" ? value : "";
 }
 
 function Field({

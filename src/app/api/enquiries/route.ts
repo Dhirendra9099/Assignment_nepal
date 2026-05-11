@@ -39,23 +39,25 @@ export async function POST(request: NextRequest) {
     academicIntegrityAccepted: data.academicIntegrityAccepted,
   };
 
-  const emailSent = await sendAdminNotification({
-    subject: `New Assignment Nepal enquiry: ${enquiryData.supportType}`,
-    replyTo: enquiryData.email,
-    text: [
-      `Name: ${enquiryData.fullName}`,
-      `Email: ${enquiryData.email}`,
-      `Phone: ${enquiryData.phone || "Not provided"}`,
-      `College: ${enquiryData.collegeName || "Not provided"}`,
-      `Programme: ${enquiryData.programmeName || "Not provided"}`,
-      `Subject: ${enquiryData.subject || "Not provided"}`,
-      `Support type: ${enquiryData.supportType}`,
-      `Preferred contact method: ${enquiryData.preferredContactMethod || "Not provided"}`,
-      `Message: ${enquiryData.message}`,
-      "",
-      MANDATORY_DISCLAIMER,
-    ].join("\n"),
-  });
+  const emailSent =
+    request.headers.get("x-assignment-nepal-notification") === "formsubmit" ||
+    (await sendAdminNotification({
+      subject: `New Assignment Nepal enquiry: ${enquiryData.supportType}`,
+      replyTo: enquiryData.email,
+      text: [
+        `Name: ${enquiryData.fullName}`,
+        `Email: ${enquiryData.email}`,
+        `Phone: ${enquiryData.phone || "Not provided"}`,
+        `College: ${enquiryData.collegeName || "Not provided"}`,
+        `Programme: ${enquiryData.programmeName || "Not provided"}`,
+        `Subject: ${enquiryData.subject || "Not provided"}`,
+        `Support type: ${enquiryData.supportType}`,
+        `Preferred contact method: ${enquiryData.preferredContactMethod || "Not provided"}`,
+        `Message: ${enquiryData.message}`,
+        "",
+        MANDATORY_DISCLAIMER,
+      ].join("\n"),
+    }));
 
   let dbSaved = false;
   try {

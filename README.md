@@ -41,7 +41,7 @@ The public contact email and WhatsApp number are:
 - Email: `assignmentnepal63@gmail.com`
 - Phone / WhatsApp: `9744998670`
 
-Live contact emails are forwarded with FormSubmit.co by default, so Gmail SMTP is not required. The first live submission may send an activation email to `assignmentnepal63@gmail.com`; click the activation link from FormSubmit to fully enable delivery.
+Live contact emails are forwarded with browser-side FormSubmit.co AJAX by default, so Gmail SMTP is not required. The first live submission may send an activation email to `assignmentnepal63@gmail.com`; click the activation link from FormSubmit to fully enable delivery. The server API still accepts enquiries for database storage and can use SMTP later as a fallback.
 
 Optional SMTP fallback variables can be configured later:
 

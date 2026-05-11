@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { MANDATORY_DISCLAIMER } from "@/lib/constants";
+import { submitToFormSubmit } from "@/lib/formsubmit-client";
 
 const supportTypes = [
   "Programme / Module Guidance",
@@ -27,14 +28,58 @@ export function ContactForm({ defaultSupportType = "" }: { defaultSupportType?: 
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     setState("submitting");
     setMessage("");
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const payload: Record<string, unknown> = Object.fromEntries(formData.entries());
     payload.consentToContact = formData.get("consentToContact") === "on";
     payload.consentToPrivacyPolicy = formData.get("consentToPrivacyPolicy") === "on";
     payload.academicIntegrityAccepted = formData.get("academicIntegrityAccepted") === "on";
+
+    if (payload.website) {
+      setState("success");
+      setMessage("Thanks. Your enquiry has been received.");
+      form.reset();
+      return;
+    }
+
+    try {
+      await submitToFormSubmit({
+        subject: `New Assignment Nepal enquiry: ${textValue(payload.supportType)}`,
+        replyTo: textValue(payload.email),
+        fields: {
+          Name: textValue(payload.fullName),
+          Email: textValue(payload.email),
+          "Phone / WhatsApp": textValue(payload.phone),
+          College: textValue(payload.collegeName),
+          Programme: textValue(payload.programmeName),
+          "Subject / module": textValue(payload.subject),
+          "Support type": textValue(payload.supportType),
+          "Preferred contact method": textValue(payload.preferredContactMethod),
+        },
+        messageLines: [
+          `Name: ${textValue(payload.fullName)}`,
+          `Email: ${textValue(payload.email)}`,
+          `Phone: ${textValue(payload.phone) || "Not provided"}`,
+          `College: ${textValue(payload.collegeName) || "Not provided"}`,
+          `Programme: ${textValue(payload.programmeName) || "Not provided"}`,
+          `Subject: ${textValue(payload.subject) || "Not provided"}`,
+          `Support type: ${textValue(payload.supportType)}`,
+          `Preferred contact method: ${textValue(payload.preferredContactMethod) || "Not provided"}`,
+          `Message: ${textValue(payload.message)}`,
+        ],
+      });
+
+      void storeEnquiry(payload);
+      setState("success");
+      setMessage("Thanks. Your enquiry has been received. We will respond with ethical study-support options.");
+      form.reset();
+      return;
+    } catch {
+      // If the browser-side FormSubmit request fails, try the server fallback.
+    }
 
     const response = await fetch("/api/enquiries", {
       method: "POST",
@@ -46,7 +91,7 @@ export function ContactForm({ defaultSupportType = "" }: { defaultSupportType?: 
     if (response.ok) {
       setState("success");
       setMessage(data.message);
-      event.currentTarget.reset();
+      form.reset();
       return;
     }
 
@@ -119,6 +164,21 @@ export function ContactForm({ defaultSupportType = "" }: { defaultSupportType?: 
       ) : null}
     </form>
   );
+}
+
+async function storeEnquiry(payload: Record<string, unknown>) {
+  await fetch("/api/enquiries", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-assignment-nepal-notification": "formsubmit",
+    },
+    body: JSON.stringify(payload),
+  }).catch(() => undefined);
+}
+
+function textValue(value: unknown) {
+  return typeof value === "string" ? value : "";
 }
 
 function Field({

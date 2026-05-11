@@ -42,7 +42,7 @@ For a platform such as Vercel, run `prisma generate` during install/build and ru
 - Review every college, university, programme, and module before marking it published.
 - Change seeded admin credentials.
 - Set a strong `ADMIN_JWT_SECRET`.
-- Contact form notifications use FormSubmit.co by default and do not require SMTP.
+- Contact form notifications use browser-side FormSubmit.co AJAX by default and do not require SMTP.
 - Submit one live enquiry after deployment, then click the FormSubmit activation link sent to `assignmentnepal63@gmail.com`.
 - Configure SMTP only if a future direct Gmail fallback is required.
 - Confirm `/sitemap.xml`, `/robots.txt`, metadata, and Open Graph image.

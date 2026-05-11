@@ -32,17 +32,19 @@ export async function POST(request: NextRequest) {
     sourceUrl: sanitizePlainText(data.sourceUrl || "", 500),
   };
 
-  const emailSent = await sendAdminNotification({
-    subject: `Correction request: ${correctionData.pageType}`,
-    replyTo: correctionData.requesterEmail,
-    text: [
-      `Requester: ${correctionData.requesterName}`,
-      `Email: ${correctionData.requesterEmail}`,
-      `Page: ${correctionData.pageUrl}`,
-      `Source: ${correctionData.sourceUrl || "Not provided"}`,
-      `Details: ${correctionData.correctionDetails}`,
-    ].join("\n"),
-  });
+  const emailSent =
+    request.headers.get("x-assignment-nepal-notification") === "formsubmit" ||
+    (await sendAdminNotification({
+      subject: `Correction request: ${correctionData.pageType}`,
+      replyTo: correctionData.requesterEmail,
+      text: [
+        `Requester: ${correctionData.requesterName}`,
+        `Email: ${correctionData.requesterEmail}`,
+        `Page: ${correctionData.pageUrl}`,
+        `Source: ${correctionData.sourceUrl || "Not provided"}`,
+        `Details: ${correctionData.correctionDetails}`,
+      ].join("\n"),
+    }));
 
   let dbSaved = false;
   try {
