@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050816;
+  --foreground: #f8fbff;
+  --muted: #a9b7d5;
+  --glass: rgba(255, 255, 255, 0.09);
+  --glass-strong: rgba(255, 255, 255, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --cyan: #22d3ee;
+  --blue: #4f8cff;
+  --violet: #9b7bff;
+  --pink: #ff77c8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #050816;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.35);
+  color: #ffffff;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  outline-color: var(--cyan);
+}
+
+.glass-panel {
+  border: 1px solid var(--glass-border);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05)),
+    rgba(255, 255, 255, 0.06);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(24px) saturate(150%);
+}
+
+.glass-border {
+  position: relative;
+}
+
+.glass-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.55), rgba(155, 123, 255, 0.36), rgba(255, 119, 200, 0.44));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: -120% auto auto -80%;
+  width: 55%;
+  height: 260%;
+  transform: rotate(25deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+  transition: left 700ms ease;
+}
+
+.shine:hover::after {
+  left: 120%;
+}
+
+.liquid-bg {
+  background:
+    radial-gradient(circle at 12% 16%, rgba(34, 211, 238, 0.22), transparent 28rem),
+    radial-gradient(circle at 78% 12%, rgba(155, 123, 255, 0.24), transparent 30rem),
+    radial-gradient(circle at 52% 78%, rgba(255, 119, 200, 0.14), transparent 32rem),
+    linear-gradient(160deg, #050816 0%, #071329 45%, #08111d 100%);
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 72%);
+}
+
+.floating-ribbon {
+  background: linear-gradient(110deg, rgba(34, 211, 238, 0.24), rgba(155, 123, 255, 0.16), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 28px 90px rgba(34, 211, 238, 0.12);
+  backdrop-filter: blur(16px);
+}
+
+.glass-sphere {
+  background:
+    radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.18) 20%, transparent 34%),
+    radial-gradient(circle at 66% 72%, rgba(34, 211, 238, 0.44), rgba(155, 123, 255, 0.14) 50%, transparent 72%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 0 36px rgba(255, 255, 255, 0.18), 0 22px 70px rgba(34, 211, 238, 0.18);
+  backdrop-filter: blur(14px);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.prose-policy p {
+  margin-bottom: 1rem;
+  color: #dbe7ff;
+  line-height: 1.8;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .float-soft {
+    animation: float-soft 8s ease-in-out infinite;
+  }
+
+  .float-soft-delay {
+    animation: float-soft 9s ease-in-out 1.5s infinite;
+  }
+
+  .pulse-soft {
+    animation: pulse-soft 5s ease-in-out infinite;
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0) rotate(1.5deg);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.56;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.84;
+    transform: scale(1.035);
+  }
+}
+
+@media (max-width: 640px) {
+  .glass-panel {
+    backdrop-filter: blur(18px) saturate(135%);
+  }
+}

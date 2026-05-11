@@ -1,0 +1,16 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#050816"/>
+  <circle cx="224" cy="142" r="190" fill="#22D3EE" fill-opacity="0.22"/>
+  <circle cx="982" cy="86" r="230" fill="#9B7BFF" fill-opacity="0.24"/>
+  <circle cx="705" cy="560" r="260" fill="#FF77C8" fill-opacity="0.13"/>
+  <path d="M86 450C230 328 372 328 516 450C660 572 808 572 1014 408" stroke="white" stroke-opacity="0.18" stroke-width="44" stroke-linecap="round"/>
+  <rect x="760" y="150" width="260" height="260" rx="38" fill="white" fill-opacity="0.08" stroke="white" stroke-opacity="0.22"/>
+  <rect x="802" y="196" width="176" height="116" rx="18" fill="#22D3EE" fill-opacity="0.15" stroke="white" stroke-opacity="0.22"/>
+  <path d="M840 350H940" stroke="white" stroke-opacity="0.5" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="762" cy="392" r="42" fill="#22D3EE" fill-opacity="0.28" stroke="white" stroke-opacity="0.28"/>
+  <circle cx="1014" cy="182" r="54" fill="#FF77C8" fill-opacity="0.22" stroke="white" stroke-opacity="0.24"/>
+  <text x="92" y="238" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="800">Assignment Nepal</text>
+  <text x="98" y="322" fill="#D7E7FF" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="500">Academic Support for Students in</text>
+  <text x="98" y="368" fill="#D7E7FF" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="500">Foreign-Affiliated Colleges</text>
+  <text x="100" y="472" fill="#7DEEFF" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">Tutoring • Draft feedback • Referencing help • Study guidance</text>
+</svg>
