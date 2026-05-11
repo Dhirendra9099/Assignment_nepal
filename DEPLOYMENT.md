@@ -15,10 +15,10 @@ ADMIN_PASSWORD="set-a-strong-password"
 Optional email notification variables:
 
 ```env
-SMTP_HOST="smtp.gmail.com"
+SMTP_HOST=""
 SMTP_PORT="465"
-SMTP_USER="assignmentnepal63@gmail.com"
-SMTP_PASS="Gmail app password"
+SMTP_USER=""
+SMTP_PASS=""
 SMTP_FROM="Assignment Nepal <assignmentnepal63@gmail.com>"
 ADMIN_NOTIFICATION_EMAIL="assignmentnepal63@gmail.com"
 ```
@@ -42,7 +42,9 @@ For a platform such as Vercel, run `prisma generate` during install/build and ru
 - Review every college, university, programme, and module before marking it published.
 - Change seeded admin credentials.
 - Set a strong `ADMIN_JWT_SECRET`.
-- Configure Gmail SMTP with an app password so contact form emails are delivered to `assignmentnepal63@gmail.com`.
+- Contact form notifications use FormSubmit.co by default and do not require SMTP.
+- Submit one live enquiry after deployment, then click the FormSubmit activation link sent to `assignmentnepal63@gmail.com`.
+- Configure SMTP only if a future direct Gmail fallback is required.
 - Confirm `/sitemap.xml`, `/robots.txt`, metadata, and Open Graph image.
 - Test enquiry submission and correction request submission against the production database.
 - Confirm all public copy remains academic-integrity compliant.

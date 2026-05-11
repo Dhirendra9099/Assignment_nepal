@@ -41,7 +41,9 @@ The public contact email and WhatsApp number are:
 - Email: `assignmentnepal63@gmail.com`
 - Phone / WhatsApp: `9744998670`
 
-For live email delivery on Vercel, configure Gmail SMTP:
+Live contact emails are forwarded with FormSubmit.co by default, so Gmail SMTP is not required. The first live submission may send an activation email to `assignmentnepal63@gmail.com`; click the activation link from FormSubmit to fully enable delivery.
+
+Optional SMTP fallback variables can be configured later:
 
 ```env
 SMTP_HOST="smtp.gmail.com"
