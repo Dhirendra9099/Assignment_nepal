@@ -27,6 +27,7 @@ export default function ContactPage() {
               alt="3D lunar-inspired contact orbit artwork with enquiry support panels"
               width={1200}
               height={900}
+              sizes="(min-width: 1024px) 34vw, 100vw"
               className="contact-hero-backdrop h-auto w-full"
               priority
             />

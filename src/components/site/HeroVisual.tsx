@@ -12,6 +12,7 @@ export function HeroVisual() {
           width={1600}
           height={1200}
           priority
+          sizes="(min-width: 1024px) 48vw, 92vw"
           className="h-auto w-full"
         />
       </div>
