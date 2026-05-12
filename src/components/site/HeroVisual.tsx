@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { BookOpen, FileText, MapPinned, Sparkles } from "lucide-react";
+import { card3dAssets } from "@/lib/card-assets";
 
 export function HeroVisual() {
   return (
@@ -29,6 +30,16 @@ export function HeroVisual() {
             className="relative z-10 h-auto w-full"
           />
         </div>
+      </div>
+
+      <div className="hero-diorama-card hero-diorama-card-one">
+        <Image src={card3dAssets.collegeCampus} alt="" fill sizes="180px" className="hero-diorama-image" />
+      </div>
+      <div className="hero-diorama-card hero-diorama-card-two">
+        <Image src={card3dAssets.aiNeuralBrain} alt="" fill sizes="180px" className="hero-diorama-image" />
+      </div>
+      <div className="hero-diorama-card hero-diorama-card-three">
+        <Image src={card3dAssets.modulePlanningBoard} alt="" fill sizes="180px" className="hero-diorama-image" />
       </div>
 
       <div className="kinetic-panel glass-panel glass-border float-soft absolute left-1 top-8 rounded-3xl p-4 md:left-8 md:top-18">

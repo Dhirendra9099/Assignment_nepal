@@ -82,7 +82,7 @@ export default async function Home() {
         <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative z-10">
             <div className="lunar-kicker mb-8">BEGIN STUDY EXPERIENCE</div>
-            <h1 className="max-w-4xl text-[clamp(2.25rem,5vw,4.9rem)] font-black uppercase leading-[0.9] tracking-[-0.055em] text-white">
+            <h1 className="hero-headline max-w-4xl text-[clamp(2.55rem,5.4vw,5.6rem)] font-black uppercase leading-[0.9] text-white">
               Academic Support for Students in Foreign-Affiliated Colleges in Nepal
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-slate-300 md:text-xl">
@@ -293,11 +293,11 @@ export default async function Home() {
 function VisualFeature({ image, title, text }: { image: string; title: string; text: string }) {
   return (
     <article className="visual-feature depth-lift">
-      <div className="relative aspect-[16/10] overflow-hidden rounded-[1.35rem]">
-        <Image src={image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="visual-feature-object" loading="eager" />
+      <Image src={image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="visual-feature-object" loading="eager" />
+      <div className="visual-feature-copy">
+        <h2 className="text-xl font-black leading-tight text-white">{title}</h2>
+        <p className="mt-2 text-sm leading-6 text-slate-200">{text}</p>
       </div>
-      <h2 className="mt-4 text-lg font-bold text-white">{title}</h2>
-      <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>
     </article>
   );
 }

@@ -66,6 +66,7 @@ textarea {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 3;
   border-radius: inherit;
   padding: 1px;
   background: linear-gradient(135deg, rgba(34, 211, 238, 0.55), rgba(155, 123, 255, 0.36), rgba(255, 119, 200, 0.44));
@@ -75,6 +76,36 @@ textarea {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+
+.creative-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 1.85rem;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(34, 211, 238, 0.16), transparent 32rem),
+    radial-gradient(circle at 100% 10%, rgba(255, 119, 200, 0.12), transparent 24rem),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.035) 42%, rgba(255, 255, 255, 0.08)),
+    rgba(3, 5, 15, 0.78);
+}
+
+.creative-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.16), transparent 28%),
+    radial-gradient(circle at var(--spot-x, 72%) var(--spot-y, 18%), rgba(34, 211, 238, 0.16), transparent 30%);
+  opacity: 0.55;
+}
+
+.creative-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .shine {
@@ -163,6 +194,15 @@ textarea {
   letter-spacing: 0.48em;
   color: rgba(255, 255, 255, 0.76);
   text-transform: uppercase;
+}
+
+.hero-headline {
+  letter-spacing: -0.035em;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 42%, #9fe8ff 72%, #d3bbff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 52px rgba(34, 211, 238, 0.08);
 }
 
 .lunar-orbit {
@@ -266,6 +306,46 @@ textarea {
   transform: translateZ(70px);
 }
 
+.hero-diorama-card {
+  position: absolute;
+  z-index: 8;
+  width: 9.8rem;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(5, 8, 22, 0.68);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.46),
+    0 0 42px rgba(34, 211, 238, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(18px) saturate(155%);
+  transform-style: preserve-3d;
+}
+
+.hero-diorama-image {
+  object-fit: cover;
+  filter: saturate(1.12) contrast(1.05);
+}
+
+.hero-diorama-card-one {
+  left: -0.5rem;
+  top: 14rem;
+  transform: rotateZ(-7deg) rotateY(14deg) translateZ(94px);
+}
+
+.hero-diorama-card-two {
+  right: -0.35rem;
+  top: 7.5rem;
+  transform: rotateZ(7deg) rotateY(-14deg) translateZ(104px);
+}
+
+.hero-diorama-card-three {
+  right: 1.2rem;
+  bottom: 5.2rem;
+  transform: rotateZ(-3deg) rotateY(-10deg) translateZ(98px);
+}
+
 .depth-lift {
   transform-style: preserve-3d;
   will-change: transform;
@@ -281,10 +361,11 @@ textarea {
   isolation: isolate;
   display: grid;
   place-items: center;
-  height: 11rem;
+  aspect-ratio: 4 / 3;
+  height: auto;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 1.25rem;
+  border-radius: 1.45rem;
   background:
     radial-gradient(circle at 52% 45%, rgba(34, 211, 238, 0.16), transparent 46%),
     radial-gradient(circle at 72% 28%, rgba(155, 123, 255, 0.18), transparent 34%),
@@ -296,7 +377,7 @@ textarea {
 .card-media::before,
 .service-media::before,
 .subject-mini-art::before,
-.visual-feature > div::before {
+.visual-feature::before {
   content: "";
   position: absolute;
   inset: 15%;
@@ -310,22 +391,26 @@ textarea {
 }
 
 .card-media-object,
-.subject-mini-object,
-.visual-feature-object {
+.subject-mini-object {
   z-index: 1;
-  object-fit: contain;
-  padding: 1.05rem;
+  object-fit: cover;
+  padding: 0;
   filter:
-    drop-shadow(0 26px 28px rgba(0, 0, 0, 0.5))
-    drop-shadow(0 0 22px rgba(34, 211, 238, 0.18));
+    saturate(1.12)
+    contrast(1.04)
+    drop-shadow(0 24px 34px rgba(0, 0, 0, 0.42));
 }
 
 .visual-feature-object {
-  padding: 1.35rem;
+  z-index: 0;
+  object-fit: cover;
+  padding: 0;
+  filter: saturate(1.1) contrast(1.05);
 }
 
 .service-media {
-  height: 10rem;
+  aspect-ratio: 4 / 3;
+  height: auto;
 }
 
 .card-media-label,
@@ -373,6 +458,7 @@ textarea {
 .visual-feature {
   position: relative;
   isolation: isolate;
+  min-height: 25rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 1.75rem;
@@ -384,10 +470,32 @@ textarea {
   backdrop-filter: blur(22px) saturate(145%);
 }
 
+.visual-feature::before {
+  z-index: 1;
+  inset: auto 0 0 0;
+  height: 55%;
+  border-radius: 0;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.82));
+  filter: none;
+  opacity: 1;
+}
+
+.visual-feature-copy {
+  position: absolute;
+  inset: auto 1rem 1rem 1rem;
+  z-index: 2;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(2, 5, 16, 0.62);
+  padding: 1.1rem;
+  backdrop-filter: blur(18px) saturate(145%);
+}
+
 .subject-mini-art {
   position: relative;
   isolation: isolate;
-  height: 8.5rem;
+  aspect-ratio: 4 / 3;
+  height: auto;
   overflow: hidden;
   border-radius: 1.25rem;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -435,11 +543,12 @@ textarea {
 
 .card-art-image {
   z-index: 1;
-  object-fit: contain;
-  padding: 0.7rem;
+  object-fit: cover;
+  padding: 0;
   filter:
-    drop-shadow(0 20px 24px rgba(0, 0, 0, 0.48))
-    drop-shadow(0 0 20px rgba(34, 211, 238, 0.16));
+    saturate(1.12)
+    contrast(1.04)
+    drop-shadow(0 18px 22px rgba(0, 0, 0, 0.34));
 }
 
 .visual-split {
@@ -508,6 +617,18 @@ textarea {
 
   .lunar-orbit {
     animation: orbit-turn 18s linear infinite;
+  }
+
+  .hero-diorama-card-one {
+    animation: float-soft 8.2s ease-in-out infinite;
+  }
+
+  .hero-diorama-card-two {
+    animation: float-soft 9.1s ease-in-out 0.8s infinite;
+  }
+
+  .hero-diorama-card-three {
+    animation: float-soft 8.6s ease-in-out 1.4s infinite;
   }
 
   .card-media img,
@@ -629,12 +750,36 @@ textarea {
     transform: translateZ(24px);
   }
 
+  .hero-diorama-card {
+    width: 7rem;
+  }
+
+  .hero-diorama-card-one {
+    left: 0;
+    top: 12.5rem;
+  }
+
+  .hero-diorama-card-two {
+    right: 0.15rem;
+    top: 8.25rem;
+  }
+
+  .hero-diorama-card-three {
+    display: none;
+  }
+
   .card-media {
-    height: 10.75rem;
+    aspect-ratio: 4 / 3;
+    height: auto;
   }
 
   .service-media {
-    height: 10rem;
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+
+  .visual-feature {
+    min-height: 22rem;
   }
 
   .card-art {
