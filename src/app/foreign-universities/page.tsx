@@ -1,5 +1,6 @@
 import { UniversityCard } from "@/components/cards/UniversityCard";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { PageHero } from "@/components/site/PageHero";
+import { showcaseAssets } from "@/lib/card-assets";
 import { getForeignUniversities } from "@/lib/repository";
 import { createMetadata } from "@/lib/seo";
 
@@ -22,7 +23,12 @@ export default async function ForeignUniversitiesPage({ searchParams }: { search
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
-      <SectionHeader as="h1" title="Foreign Universities Directory" description="Compare university partners represented through Nepal-based foreign-affiliated colleges. Always verify current partnership and programme status with official sources." />
+      <PageHero
+        title="Foreign Universities Directory"
+        description="Compare university partners represented through Nepal-based foreign-affiliated colleges. Always verify current partnership and programme status with official sources."
+        image={showcaseAssets.hero}
+        imageAlt="High-resolution 3D foreign university partner atlas visual for Assignment Nepal"
+      />
       <form className="glass-panel mb-8 grid gap-3 rounded-[1.5rem] p-4 md:grid-cols-[1fr_260px_auto_auto]" action="/foreign-universities">
         <input name="q" defaultValue={params.q || ""} placeholder="Search universities, subject areas, programmes" className="h-12 rounded-2xl border border-white/14 bg-slate-950/65 px-4 text-sm text-white" />
         <select name="country" defaultValue={params.country || ""} className="h-12 rounded-2xl border border-white/14 bg-slate-950/65 px-4 text-sm text-white">

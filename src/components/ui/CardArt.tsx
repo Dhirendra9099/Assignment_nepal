@@ -14,7 +14,7 @@ export function CardArt({
 }) {
   return (
     <div className={cn("card-art", compact && "card-art-compact", className)}>
-      <Image src={src} alt={alt} fill sizes={compact ? "96px" : "(min-width: 768px) 180px, 42vw"} className="card-art-image" />
+      <Image src={src} alt={alt} fill loading="eager" sizes={compact ? "96px" : "(min-width: 768px) 180px, 42vw"} className="card-art-image" />
     </div>
   );
 }

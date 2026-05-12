@@ -3,7 +3,7 @@ import { Mail, MapPin, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { CardArt } from "@/components/ui/CardArt";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { card3dAssets } from "@/lib/card-assets";
+import { card3dAssets, showcaseAssets } from "@/lib/card-assets";
 import { CONTACT_EMAIL, MANDATORY_DISCLAIMER, WHATSAPP_NUMBER } from "@/lib/constants";
 import { createMetadata } from "@/lib/seo";
 
@@ -25,21 +25,13 @@ export default function ContactPage() {
           </p>
           <div className="contact-hero-stage depth-lift mt-7 overflow-hidden rounded-[2rem] border border-white/12 bg-white/6">
             <Image
-              src="/images/lunar-inspired/contact-orbit.png"
-              alt="3D lunar-inspired contact orbit artwork with enquiry support panels"
-              width={1200}
-              height={900}
+              src={showcaseAssets.contact}
+              alt="High-resolution 3D liquid-glass contact support panel for Assignment Nepal"
+              width={1586}
+              height={992}
               sizes="(min-width: 1024px) 34vw, 100vw"
-              className="contact-hero-backdrop h-auto w-full"
+              className="h-auto w-full"
               priority
-            />
-            <Image
-              src="/images/generated/assignment-nepal-student-cutout.png"
-              alt="AI-generated student with laptop and floating academic support panels"
-              width={1536}
-              height={1024}
-              sizes="(min-width: 1024px) 34vw, 100vw"
-              className="contact-student-layer"
             />
           </div>
           <div className="mt-8 grid gap-4">

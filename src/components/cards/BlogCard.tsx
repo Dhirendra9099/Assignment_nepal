@@ -15,6 +15,7 @@ export function BlogCard({ post }: { post: any }) {
           src={visual}
           alt={`3D academic resource visual for ${post.title}`}
           fill
+          loading="eager"
           sizes="(min-width: 768px) 33vw, 100vw"
           className="card-media-object"
         />

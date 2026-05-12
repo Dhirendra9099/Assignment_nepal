@@ -12,7 +12,7 @@ import { JsonLd } from "@/components/site/JsonLd";
 import { SearchPanel } from "@/components/site/SearchPanel";
 import { TrustBanner } from "@/components/site/TrustBanner";
 import { CardArt } from "@/components/ui/CardArt";
-import { card3dAssets, getSubjectVisual } from "@/lib/card-assets";
+import { card3dAssets, getSubjectVisual, showcaseAssets } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER } from "@/lib/constants";
 import { getBlogPosts, getFeaturedColleges, getForeignUniversities, getProgrammes, getServices, getSubjectAreas, getTestimonials } from "@/lib/repository";
 import { createMetadata, organizationSchema } from "@/lib/seo";
@@ -74,24 +74,28 @@ export default async function Home() {
   return (
     <>
       <JsonLd data={organizationSchema()} />
-      <section className="lunar-hero relative overflow-hidden px-4 pb-16 pt-14 md:px-6 md:pb-24 md:pt-20">
+      <section className="atlas-hero relative overflow-hidden px-4 pb-12 pt-12 md:px-6 md:pb-20 md:pt-20">
         <div className="absolute inset-0 -z-10">
-          <div className="lunar-grid absolute inset-0" />
-          <div className="lunar-void absolute left-1/2 top-1/2 h-[44rem] w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full" />
+          <div className="atlas-grid absolute inset-0" />
+          <div className="atlas-ribbon atlas-ribbon-one" />
+          <div className="atlas-ribbon atlas-ribbon-two" />
         </div>
-        <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative z-10">
-            <div className="lunar-kicker mb-8">BEGIN STUDY EXPERIENCE</div>
-            <h1 className="hero-headline max-w-4xl text-[clamp(2.55rem,5.4vw,5.6rem)] font-black uppercase leading-[0.9] text-white">
+        <div className="mx-auto grid min-h-[calc(100vh-5rem)] min-w-0 max-w-7xl items-center gap-10 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="relative z-10 min-w-0">
+            <div className="hero-identity mb-7">
+              <span>Assignment Nepal</span>
+              <span>Foreign-affiliated college support</span>
+            </div>
+            <h1 className="hero-title max-w-4xl text-[clamp(2.35rem,4.8vw,4.9rem)] font-black leading-[0.98] text-white">
               Academic Support for Students in Foreign-Affiliated Colleges in Nepal
             </h1>
-            <p className="mt-7 max-w-2xl text-base leading-8 text-slate-300 md:text-xl">
+            <p className="hero-subtitle mt-7 max-w-2xl text-base leading-8 text-slate-300 md:text-xl">
               Explore colleges, programmes, subjects, and module structures, and get ethical support through tutoring, feedback,
               proofreading, referencing help, and study guidance.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <LinkButton href="/colleges">Explore Colleges</LinkButton>
-              <LinkButton href="/contact" variant="secondary">
+              <LinkButton href="/colleges" className="w-full sm:w-auto">Explore Colleges</LinkButton>
+              <LinkButton href="/contact" variant="secondary" className="w-full sm:w-auto">
                 Get Study Guidance
               </LinkButton>
             </div>
@@ -99,43 +103,65 @@ export default async function Home() {
               <ShieldCheck className="h-4 w-4" />
               We support learning. We do not complete assessed work for submission.
             </div>
+            <div className="hero-stat-row mt-8">
+              <div>
+                <strong>23+</strong>
+                <span>sample college entries</span>
+              </div>
+              <div>
+                <strong>Module-led</strong>
+                <span>study guidance</span>
+              </div>
+              <div>
+                <strong>Integrity</strong>
+                <span>visible in every enquiry</span>
+              </div>
+            </div>
           </div>
           <HeroVisual />
         </div>
       </section>
 
-      <section className="px-4 py-8 md:px-6">
+      <section className="relative z-10 -mt-8 px-4 pb-10 md:px-6">
         <SearchPanel items={searchItems} />
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-10 md:px-6">
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="grid gap-5 lg:grid-cols-[1.1fr_0.95fr_0.95fr]">
           <VisualFeature
-            image={card3dAssets.collegeCampus}
-            title="College directory visuals"
+            image={showcaseAssets.colleges}
+            title="College research atlas"
             text="Compare colleges, university partners, cities, programmes, and verification notes through a cleaner research-first interface."
           />
           <VisualFeature
-            image={card3dAssets.modulePlanningBoard}
-            title="3D study-support system"
+            image={showcaseAssets.services}
+            title="Ethical support cockpit"
             text="Explore tutoring, planning, referencing, proofreading, and draft feedback through a premium glass education interface."
           />
           <VisualFeature
-            image={card3dAssets.blogResourceNotebook}
+            image={showcaseAssets.resources}
             title="Academic resource hub"
             text="Read practical guides for study skills, module planning, referencing, academic integrity, and career decisions."
           />
         </div>
       </section>
 
-      <section className="lunar-editorial mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
-        <div className="lunar-kicker">INSPIRED BY CLARITY, DESIGNED FOR LEARNING</div>
-        <h2 className="mt-8 max-w-5xl text-[clamp(2.6rem,7vw,7rem)] font-black uppercase leading-[0.9] tracking-[-0.06em] text-white">
-          In a world full of briefs, own your learning.
-        </h2>
-        <div className="mt-12 overflow-hidden rounded-[2.4rem] border border-white/12 bg-white/5">
+      <section className="showcase-band mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
+        <div className="grid items-end gap-8 lg:grid-cols-[0.92fr_1.08fr]">
+          <div>
+            <div className="section-kicker">Designed for learning ownership</div>
+            <h2 className="mt-6 max-w-4xl text-[clamp(2.25rem,6vw,5.8rem)] font-black leading-[0.93] text-white">
+              A premium study interface for students who need clarity, not shortcuts.
+            </h2>
+          </div>
+          <p className="max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+            The directory, service pages, policies, and enquiry flow all point students toward concept explanation, planning,
+            feedback, proofreading, referencing help, and research guidance while keeping assessed work under the student&apos;s own control.
+          </p>
+        </div>
+        <div className="showcase-panorama mt-12 overflow-hidden">
           <Image
-            src="/images/lunar-inspired/study-gallery-lab.png"
+            src={showcaseAssets.programmes}
             alt="3D module atlas artwork for Assignment Nepal college and programme discovery"
             width={1400}
             height={900}
@@ -182,6 +208,7 @@ export default async function Home() {
                   src={getSubjectVisual(subject)}
                   alt={`3D ${subject.name} subject visual`}
                   fill
+                  loading="eager"
                   sizes="(min-width: 1024px) 18vw, (min-width: 640px) 45vw, 100vw"
                   className="subject-mini-object"
                 />
@@ -201,7 +228,7 @@ export default async function Home() {
         <div className="visual-split mb-8 grid items-center gap-8 overflow-hidden rounded-[2rem] border border-white/12 bg-white/6 p-5 md:grid-cols-[0.9fr_1.1fr] md:p-7">
           <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem]">
             <Image
-              src={card3dAssets.modulePlanningBoard}
+              src={showcaseAssets.services}
               alt="3D constellation artwork for Assignment Nepal academic support services"
               fill
               sizes="(min-width: 768px) 45vw, 100vw"
@@ -210,7 +237,7 @@ export default async function Home() {
             />
           </div>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Ethical support cockpit</p>
+            <p className="section-kicker">Ethical support cockpit</p>
             <h3 className="mt-3 text-2xl font-black leading-tight text-white md:text-4xl">
               Guidance that improves your own work, not a shortcut around learning.
             </h3>
@@ -276,13 +303,24 @@ export default async function Home() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 md:px-6">
-        <div className="glass-panel glass-border rounded-[2rem] p-8 text-center md:p-12">
-          <h2 className="mx-auto max-w-3xl text-3xl font-black leading-tight text-white md:text-5xl">
-            Need help understanding your module or assignment brief?
-          </h2>
-          <p className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-slate-300">{MANDATORY_DISCLAIMER}</p>
-          <div className="mt-8">
-            <LinkButton href="/contact">Contact Assignment Nepal</LinkButton>
+        <div className="cta-showcase glass-panel glass-border overflow-hidden rounded-[2rem] md:grid md:grid-cols-[1fr_0.85fr]">
+          <div className="p-8 md:p-12">
+            <h2 className="max-w-3xl text-3xl font-black leading-tight text-white md:text-5xl">
+              Need help understanding your module or assignment brief?
+            </h2>
+            <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-300">{MANDATORY_DISCLAIMER}</p>
+            <div className="mt-8">
+              <LinkButton href="/contact">Contact Assignment Nepal</LinkButton>
+            </div>
+          </div>
+          <div className="relative min-h-[18rem] border-t border-white/10 md:border-l md:border-t-0">
+            <Image
+              src={showcaseAssets.contact}
+              alt="3D liquid-glass contact support panel for Assignment Nepal"
+              fill
+              sizes="(min-width: 768px) 38vw, 100vw"
+              className="visual-feature-object"
+            />
           </div>
         </div>
       </section>

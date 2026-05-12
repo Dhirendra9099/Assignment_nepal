@@ -31,6 +31,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <Badge>Ethical service scope</Badge>
       <h1 className="mt-4 text-4xl font-black leading-tight text-white md:text-6xl">{service.title}</h1>
       <p className="mt-5 max-w-4xl text-lg leading-8 text-slate-300">{service.fullDescription}</p>
+      <CardArt src={serviceVisual} alt={`3D service visual for ${service.title}`} className="mt-8 max-w-5xl" />
 
       <div className="mt-10 grid gap-5 lg:grid-cols-2">
         <GlassCard>

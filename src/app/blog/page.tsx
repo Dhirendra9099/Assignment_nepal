@@ -1,6 +1,7 @@
 import { BlogCard } from "@/components/cards/BlogCard";
+import { PageHero } from "@/components/site/PageHero";
 import { Badge } from "@/components/ui/Badge";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { showcaseAssets } from "@/lib/card-assets";
 import { blogCategories } from "@/lib/sample-data";
 import { getBlogPosts } from "@/lib/repository";
 import { createMetadata } from "@/lib/seo";
@@ -18,7 +19,12 @@ export default async function BlogPage({ searchParams }: { searchParams?: Promis
   const filtered = params.category ? posts.filter((post: any) => post.category === params.category) : posts;
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
-      <SectionHeader as="h1" title="Blog / Resources" description="Practical guides focused on learning, planning, referencing, research skills, and academic integrity." />
+      <PageHero
+        title="Blog / Resources"
+        description="Practical guides focused on learning, planning, referencing, research skills, and academic integrity."
+        image={showcaseAssets.resources}
+        imageAlt="High-resolution 3D academic resource library visual for Assignment Nepal"
+      />
       <div className="mb-8 flex flex-wrap gap-2">
         <a href="/blog"><Badge>All</Badge></a>
         {blogCategories.map((category) => (

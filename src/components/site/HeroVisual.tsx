@@ -1,55 +1,40 @@
 import Image from "next/image";
-import { BookOpen, FileText, MapPinned, Sparkles } from "lucide-react";
-import { card3dAssets } from "@/lib/card-assets";
+import { BookOpen, FileText, MapPinned, ShieldCheck, Sparkles } from "lucide-react";
+import { card3dAssets, showcaseAssets } from "@/lib/card-assets";
 
 export function HeroVisual() {
   return (
-    <div className="scene-3d relative mx-auto h-[430px] w-full max-w-[620px] md:h-[620px]" aria-label="3D academic orbit illustration">
-      <div className="lunar-orbit absolute left-1/2 top-[44%] h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 md:h-[34rem] md:w-[34rem]" />
-      <div className="hero-image-frame depth-lift absolute left-1/2 top-14 w-[92%] -translate-x-1/2 overflow-hidden rounded-[2rem] md:top-16 md:rounded-[2.6rem]">
+    <div className="hero-studio scene-3d relative mx-auto w-full max-w-[680px]" aria-label="3D academic guidance interface">
+      <div className="hero-studio-frame depth-lift">
         <Image
-          src="/images/lunar-inspired/academic-orbit-hero.png"
-          alt="3D academic orbit artwork for Assignment Nepal with moon-like sphere, learning panels, and programme tags"
-          width={1600}
-          height={1200}
+          src={showcaseAssets.hero}
+          alt="High-resolution 3D liquid-glass academic atlas for Assignment Nepal"
+          fill
           priority
-          sizes="(min-width: 1024px) 48vw, 92vw"
-          className="h-auto w-full"
+          sizes="(min-width: 1024px) 48vw, 96vw"
+          className="hero-studio-image"
         />
+        <div className="hero-studio-glass" />
       </div>
 
-      <div className="hero-cutout-shell pointer-events-none absolute bottom-8 left-1/2 z-10 w-[112%] max-w-[720px] -translate-x-1/2 md:bottom-2 md:w-[118%]">
-        <div className="hero-cutout-depth">
-          <Image
-            src="/images/generated/assignment-nepal-student-cutout.png"
-            alt="AI-generated Nepalese student using a laptop with floating glass academic panels"
-            width={1536}
-            height={1024}
-            priority
-            sizes="(min-width: 1024px) 56vw, 112vw"
-            className="relative z-10 h-auto w-full"
-          />
-        </div>
+      <div className="hero-studio-card hero-studio-card-one">
+        <Image src={card3dAssets.collegeCampus} alt="" fill sizes="210px" className="hero-diorama-image" />
+      </div>
+      <div className="hero-studio-card hero-studio-card-two">
+        <Image src={card3dAssets.referencingBooks} alt="" fill sizes="210px" className="hero-diorama-image" />
+      </div>
+      <div className="hero-studio-card hero-studio-card-three">
+        <Image src={card3dAssets.cyberSecurityShield} alt="" fill sizes="210px" className="hero-diorama-image" />
       </div>
 
-      <div className="hero-diorama-card hero-diorama-card-one">
-        <Image src={card3dAssets.collegeCampus} alt="" fill sizes="180px" className="hero-diorama-image" />
-      </div>
-      <div className="hero-diorama-card hero-diorama-card-two">
-        <Image src={card3dAssets.aiNeuralBrain} alt="" fill sizes="180px" className="hero-diorama-image" />
-      </div>
-      <div className="hero-diorama-card hero-diorama-card-three">
-        <Image src={card3dAssets.modulePlanningBoard} alt="" fill sizes="180px" className="hero-diorama-image" />
-      </div>
-
-      <div className="kinetic-panel glass-panel glass-border float-soft absolute left-1 top-8 rounded-3xl p-4 md:left-8 md:top-18">
+      <div className="kinetic-panel hero-chip hero-chip-top glass-panel glass-border float-soft">
         <div className="flex items-center gap-2 text-sm font-semibold text-cyan-50">
           <Sparkles className="h-4 w-4 text-pink-100" />
-          Study orbit
+          Verified study atlas
         </div>
       </div>
 
-      <div className="kinetic-panel glass-panel absolute bottom-28 right-0 w-52 rounded-3xl p-4 md:right-3">
+      <div className="kinetic-panel hero-guidance-panel glass-panel">
         <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-white">
           <BookOpen className="h-4 w-4 text-cyan-200" />
           Module guidance
@@ -61,7 +46,7 @@ export function HeroVisual() {
         </div>
       </div>
 
-      <div className="kinetic-panel glass-panel absolute bottom-6 left-3 w-60 rounded-3xl p-4 md:left-12">
+      <div className="kinetic-panel hero-feedback-panel glass-panel">
         <div className="flex items-start gap-3">
           <div className="rounded-2xl bg-cyan-300/20 p-3 text-cyan-100">
             <FileText className="h-6 w-6" />
@@ -73,7 +58,12 @@ export function HeroVisual() {
         </div>
       </div>
 
-      <div className="kinetic-panel glass-panel absolute right-8 top-2 rounded-3xl p-3 text-cyan-100 md:right-12">
+      <div className="kinetic-panel hero-integrity-panel glass-panel">
+        <ShieldCheck className="h-5 w-5 text-emerald-200" />
+        <span>Integrity-first</span>
+      </div>
+
+      <div className="kinetic-panel hero-map-pin glass-panel">
         <MapPinned className="h-7 w-7" />
       </div>
     </div>

@@ -14,6 +14,7 @@ export function SubjectCard({ subject }: { subject: any }) {
           src={visual}
           alt={`3D subject area visual for ${subject.name}`}
           fill
+          loading="eager"
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
           className="card-media-object"
         />

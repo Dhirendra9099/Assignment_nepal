@@ -1,5 +1,6 @@
 import { SubjectCard } from "@/components/cards/SubjectCard";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { PageHero } from "@/components/site/PageHero";
+import { showcaseAssets } from "@/lib/card-assets";
 import { getSubjectAreas } from "@/lib/repository";
 import { createMetadata } from "@/lib/seo";
 
@@ -14,7 +15,12 @@ export default async function SubjectsPage() {
   const subjects = await getSubjectAreas();
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
-      <SectionHeader as="h1" title="Modules / Subjects Directory" description="Find subject areas and programme links for ethical tutoring, module explanation, referencing support, and draft feedback." />
+      <PageHero
+        title="Modules / Subjects Directory"
+        description="Find subject areas and programme links for ethical tutoring, module explanation, referencing support, and draft feedback."
+        image={showcaseAssets.programmes}
+        imageAlt="High-resolution 3D module and subject roadmap visual for Assignment Nepal"
+      />
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {subjects.map((subject: any) => (
           <SubjectCard key={subject.slug} subject={subject} />

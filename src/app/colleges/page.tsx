@@ -1,6 +1,7 @@
 import { CollegeCard } from "@/components/cards/CollegeCard";
+import { PageHero } from "@/components/site/PageHero";
 import { Badge } from "@/components/ui/Badge";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { showcaseAssets } from "@/lib/card-assets";
 import { getColleges } from "@/lib/repository";
 import { createMetadata } from "@/lib/seo";
 
@@ -32,10 +33,11 @@ export default async function CollegesPage({ searchParams }: { searchParams?: Pr
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
-      <SectionHeader
-        as="h1"
+      <PageHero
         title="Colleges Directory"
         description="Search foreign-affiliated colleges in Nepal and verify current programme details with official college or university sources before applying."
+        image={showcaseAssets.colleges}
+        imageAlt="High-resolution 3D foreign-affiliated college directory visual for Nepal students"
       />
       <form className="glass-panel mb-8 grid gap-3 rounded-[1.5rem] p-4 md:grid-cols-5" action="/colleges">
         <input name="q" defaultValue={params.q || ""} placeholder="Search colleges, programmes, modules" className="h-12 rounded-2xl border border-white/14 bg-slate-950/65 px-4 text-sm text-white md:col-span-2" />

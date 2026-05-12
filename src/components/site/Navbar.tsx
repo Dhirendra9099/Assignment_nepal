@@ -5,10 +5,10 @@ import { LinkButton } from "@/components/ui/Button";
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/45 backdrop-blur-2xl">
+    <header className="nav-shell sticky top-0 z-50 border-b border-white/10 bg-slate-950/45 backdrop-blur-2xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <Link href="/" className="flex items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300">
-          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-cyan-300 to-violet-400 text-slate-950 shadow-lg">
+          <span className="brand-mark grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-cyan-300 to-violet-400 text-slate-950 shadow-lg">
             <Sparkles className="h-5 w-5" />
           </span>
           <span className="text-base font-bold text-white md:text-lg">Assignment Nepal</span>

@@ -107,7 +107,7 @@ export function ContactForm({ defaultSupportType = "" }: { defaultSupportType?: 
       <div className="mb-6 flex items-center gap-4">
         <CardArt src={card3dAssets.contactSupportPhone} alt="" compact />
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Study support enquiry</p>
+          <p className="section-kicker">Study support enquiry</p>
           <p className="mt-1 text-sm leading-6 text-slate-300">Share the module or brief you want to understand.</p>
         </div>
       </div>

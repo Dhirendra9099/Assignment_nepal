@@ -42,6 +42,7 @@ export function ServiceCard({ service }: { service: any }) {
           src={visual}
           alt={`3D service visual for ${service.title}`}
           fill
+          loading="eager"
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
           className="card-media-object"
         />

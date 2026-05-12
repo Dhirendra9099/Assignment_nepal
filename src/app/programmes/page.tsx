@@ -1,5 +1,6 @@
 import { ProgrammeCard } from "@/components/cards/ProgrammeCard";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { PageHero } from "@/components/site/PageHero";
+import { showcaseAssets } from "@/lib/card-assets";
 import { getProgrammes } from "@/lib/repository";
 import { createMetadata } from "@/lib/seo";
 
@@ -27,7 +28,12 @@ export default async function ProgrammesPage({ searchParams }: { searchParams?: 
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
-      <SectionHeader as="h1" title="Programmes Directory" description="Compare programme structures, subject areas, module examples, assessment-style notes, and ethical study-support options." />
+      <PageHero
+        title="Programmes Directory"
+        description="Compare programme structures, subject areas, module examples, assessment-style notes, and ethical study-support options."
+        image={showcaseAssets.programmes}
+        imageAlt="High-resolution 3D curriculum roadmap visual for Assignment Nepal programmes"
+      />
       <form className="glass-panel mb-8 grid gap-3 rounded-[1.5rem] p-4 md:grid-cols-[1fr_220px_260px_auto_auto]" action="/programmes">
         <input name="q" defaultValue={params.q || ""} placeholder="Search programmes, colleges, universities" className="h-12 rounded-2xl border border-white/14 bg-slate-950/65 px-4 text-sm text-white" />
         <select name="level" defaultValue={params.level || ""} className="h-12 rounded-2xl border border-white/14 bg-slate-950/65 px-4 text-sm text-white">

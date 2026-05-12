@@ -15,6 +15,7 @@ export function CollegeCard({ college }: { college: any }) {
           src={visual}
           alt={`3D study directory visual for ${college.name}`}
           fill
+          loading="eager"
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
           className="card-media-object"
         />

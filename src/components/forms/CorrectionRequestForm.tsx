@@ -79,7 +79,7 @@ export function CorrectionRequestForm() {
       <div className="mb-6 flex items-center gap-4">
         <CardArt src={card3dAssets.moduleRoadmap} alt="" compact />
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Source-backed update</p>
+          <p className="section-kicker">Source-backed update</p>
           <p className="mt-1 text-sm leading-6 text-slate-300">Help keep directory information accurate and verified.</p>
         </div>
       </div>
