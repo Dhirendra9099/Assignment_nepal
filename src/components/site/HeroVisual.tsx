@@ -3,16 +3,14 @@ import { BookOpen, FileText, MapPinned, Sparkles } from "lucide-react";
 
 export function HeroVisual() {
   return (
-    <div className="scene-3d relative mx-auto h-[430px] w-full max-w-[560px] md:h-[590px]" aria-label="Liquid glass education illustration">
-      <div className="floating-ribbon float-soft absolute left-2 top-12 h-20 w-64 rotate-[-16deg] rounded-full opacity-70 md:left-8 md:w-80" />
-      <div className="floating-ribbon float-soft-delay absolute right-2 top-36 h-16 w-56 rotate-[18deg] rounded-full opacity-60 md:right-4 md:w-72" />
-
-      <div className="hero-image-frame depth-lift absolute left-1/2 top-16 w-[90%] -translate-x-1/2 overflow-hidden rounded-[2rem] md:top-20 md:w-[92%] md:rounded-[2.6rem]">
+    <div className="scene-3d relative mx-auto h-[430px] w-full max-w-[620px] md:h-[620px]" aria-label="3D academic orbit illustration">
+      <div className="lunar-orbit absolute left-1/2 top-[44%] h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 md:h-[34rem] md:w-[34rem]" />
+      <div className="hero-image-frame depth-lift absolute left-1/2 top-14 w-[92%] -translate-x-1/2 overflow-hidden rounded-[2rem] md:top-16 md:rounded-[2.6rem]">
         <Image
-          src="/images/assignment-nepal-hero-workspace.svg"
-          alt="Futuristic 3D study workspace with laptop, books, notes, and Nepal-inspired academic panels"
-          width={1200}
-          height={900}
+          src="/images/lunar-inspired/academic-orbit-hero.png"
+          alt="3D academic orbit artwork for Assignment Nepal with moon-like sphere, learning panels, and programme tags"
+          width={1600}
+          height={1200}
           priority
           className="h-auto w-full"
         />
@@ -21,7 +19,7 @@ export function HeroVisual() {
       <div className="kinetic-panel glass-panel glass-border float-soft absolute left-1 top-8 rounded-3xl p-4 md:left-8 md:top-18">
         <div className="flex items-center gap-2 text-sm font-semibold text-cyan-50">
           <Sparkles className="h-4 w-4 text-pink-100" />
-          Ethical study guidance
+          Study orbit
         </div>
       </div>
 

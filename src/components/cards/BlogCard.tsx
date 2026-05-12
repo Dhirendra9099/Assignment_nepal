@@ -10,7 +10,7 @@ export function BlogCard({ post }: { post: any }) {
     <GlassCard as="article" className="h-full">
       <div className="card-media depth-lift mb-4">
         <Image
-          src="/images/resources-visual.svg"
+          src="/images/lunar-inspired/services-constellation.png"
           alt={`3D academic resource visual for ${post.title}`}
           fill
           sizes="(min-width: 768px) 33vw, 100vw"

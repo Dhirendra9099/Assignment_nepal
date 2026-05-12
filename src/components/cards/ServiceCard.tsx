@@ -37,7 +37,7 @@ export function ServiceCard({ service }: { service: any }) {
     <GlassCard as="article" className="h-full">
       <div className="service-media depth-lift mb-5">
         <Image
-          src="/images/services-liquid-icons.svg"
+          src="/images/lunar-inspired/services-constellation.png"
           alt=""
           fill
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"

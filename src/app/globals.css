@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #050816;
+  --background: #000000;
   --foreground: #f8fbff;
   --muted: #a9b7d5;
-  --glass: rgba(255, 255, 255, 0.09);
-  --glass-strong: rgba(255, 255, 255, 0.16);
-  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass: rgba(255, 255, 255, 0.075);
+  --glass-strong: rgba(255, 255, 255, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.16);
   --cyan: #22d3ee;
   --blue: #4f8cff;
   --violet: #9b7bff;
@@ -29,7 +29,7 @@ body {
 
 html {
   scroll-behavior: smooth;
-  background: #050816;
+  background: #000000;
 }
 
 * {
@@ -52,9 +52,9 @@ textarea {
 .glass-panel {
   border: 1px solid var(--glass-border);
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05)),
-    rgba(255, 255, 255, 0.06);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.035)),
+    rgba(5, 5, 7, 0.72);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.54), inset 0 1px 0 rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(24px) saturate(150%);
 }
 
@@ -99,18 +99,18 @@ textarea {
 
 .liquid-bg {
   background:
-    radial-gradient(circle at 12% 16%, rgba(34, 211, 238, 0.22), transparent 28rem),
-    radial-gradient(circle at 78% 12%, rgba(155, 123, 255, 0.24), transparent 30rem),
-    radial-gradient(circle at 52% 78%, rgba(255, 119, 200, 0.14), transparent 32rem),
-    linear-gradient(160deg, #050816 0%, #071329 45%, #08111d 100%);
+    radial-gradient(circle at 68% 16%, rgba(148, 163, 184, 0.18), transparent 26rem),
+    radial-gradient(circle at 18% 76%, rgba(34, 211, 238, 0.11), transparent 28rem),
+    radial-gradient(circle at 80% 78%, rgba(155, 123, 255, 0.12), transparent 28rem),
+    linear-gradient(180deg, #000000 0%, #02030a 48%, #000000 100%);
 }
 
 .grid-overlay {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 54px 54px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 72%);
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at 55% 20%, rgba(0, 0, 0, 0.7), transparent 72%);
 }
 
 .floating-ribbon {
@@ -134,15 +134,76 @@ textarea {
   transform-style: preserve-3d;
 }
 
+.lunar-hero {
+  background:
+    radial-gradient(circle at 72% 35%, rgba(148, 163, 184, 0.1), transparent 34rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 35%),
+    #000000;
+}
+
+.lunar-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: radial-gradient(circle at 50% 28%, rgba(0, 0, 0, 0.75), transparent 72%);
+}
+
+.lunar-void {
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  box-shadow:
+    0 0 0 42px rgba(255, 255, 255, 0.012),
+    0 0 0 92px rgba(255, 255, 255, 0.018),
+    0 0 0 152px rgba(255, 255, 255, 0.012);
+}
+
+.lunar-kicker {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.48em;
+  color: rgba(255, 255, 255, 0.76);
+  text-transform: uppercase;
+}
+
+.lunar-orbit {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 36px rgba(255, 255, 255, 0.018),
+    0 0 0 78px rgba(255, 255, 255, 0.012),
+    0 0 0 130px rgba(255, 255, 255, 0.012);
+  transform-style: preserve-3d;
+}
+
+.lunar-orbit::before,
+.lunar-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 15%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.lunar-orbit::after {
+  inset: -12%;
+  transform: rotateX(68deg) rotateZ(-20deg);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.lunar-editorial {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
 .hero-image-frame {
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.05)),
-    rgba(255, 255, 255, 0.06);
+    linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.035)),
+    rgba(0, 0, 0, 0.6);
   box-shadow:
-    0 34px 100px rgba(0, 0, 0, 0.42),
-    0 12px 44px rgba(34, 211, 238, 0.14),
+    0 40px 130px rgba(0, 0, 0, 0.72),
+    0 12px 70px rgba(148, 163, 184, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  transform: rotateX(7deg) rotateY(-8deg) rotateZ(1deg);
+  transform: rotateX(6deg) rotateY(-10deg) rotateZ(1deg);
   transform-origin: center;
 }
 
@@ -179,16 +240,16 @@ textarea {
 .service-media {
   position: relative;
   isolation: isolate;
-  height: 9.25rem;
+  height: 11rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 1.25rem;
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 20px 50px rgba(0, 0, 0, 0.24);
+  background: rgba(0, 0, 0, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 24px 60px rgba(0, 0, 0, 0.38);
 }
 
 .service-media {
-  height: 8rem;
+  height: 10rem;
 }
 
 .card-media-label,
@@ -241,16 +302,19 @@ textarea {
   border-radius: 1.75rem;
   padding: 1rem;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
-    rgba(255, 255, 255, 0.045);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+    linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
+    rgba(0, 0, 0, 0.82);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.44);
   backdrop-filter: blur(22px) saturate(145%);
 }
 
 .visual-split {
   position: relative;
   isolation: isolate;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.26);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+    rgba(0, 0, 0, 0.82);
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.44);
   backdrop-filter: blur(22px) saturate(145%);
 }
 
@@ -279,6 +343,10 @@ textarea {
 
   .hero-image-frame {
     animation: hero-drift 9s ease-in-out infinite;
+  }
+
+  .lunar-orbit {
+    animation: orbit-turn 18s linear infinite;
   }
 
   .card-media img,
@@ -328,10 +396,16 @@ textarea {
 @keyframes hero-drift {
   0%,
   100% {
-    transform: rotateX(7deg) rotateY(-8deg) rotateZ(1deg) translate3d(0, 0, 0);
+    transform: rotateX(6deg) rotateY(-10deg) rotateZ(1deg) translate3d(0, 0, 0);
   }
   50% {
-    transform: rotateX(5deg) rotateY(-4deg) rotateZ(-0.5deg) translate3d(0, -14px, 20px);
+    transform: rotateX(4deg) rotateY(-5deg) rotateZ(-0.5deg) translate3d(0, -14px, 20px);
+  }
+}
+
+@keyframes orbit-turn {
+  to {
+    rotate: 360deg;
   }
 }
 
@@ -345,7 +419,7 @@ textarea {
   }
 
   .hero-image-frame {
-    transform: rotateX(4deg) rotateY(-3deg);
+    transform: rotateX(3deg) rotateY(-2deg);
   }
 
   .kinetic-panel {
@@ -353,11 +427,17 @@ textarea {
   }
 
   .card-media {
-    height: 8.5rem;
+    height: 10.75rem;
   }
 
   .service-media {
-    height: 7.5rem;
+    height: 10rem;
+  }
+
+  .lunar-kicker {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    letter-spacing: 0.22em;
   }
 }
 

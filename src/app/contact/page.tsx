@@ -23,10 +23,10 @@ export default function ContactPage() {
           </p>
           <div className="depth-lift mt-7 overflow-hidden rounded-[2rem] border border-white/12 bg-white/6">
             <Image
-              src="/images/contact-support.svg"
-              alt="3D liquid-glass contact support visual with phone, enquiry form, and chat panels"
-              width={1000}
-              height={760}
+              src="/images/lunar-inspired/contact-orbit.png"
+              alt="3D lunar-inspired contact orbit artwork with enquiry support panels"
+              width={1200}
+              height={900}
               className="h-auto w-full"
               priority
             />

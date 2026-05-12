@@ -51,8 +51,8 @@ export default async function ServicesPage() {
           </div>
           <div className="depth-lift relative aspect-[16/10] overflow-hidden rounded-[1.5rem]">
             <Image
-              src="/images/services-liquid-icons.svg"
-              alt="3D liquid-glass icons representing Assignment Nepal tutoring, proofreading, planning, referencing, and research guidance services"
+              src="/images/lunar-inspired/services-constellation.png"
+              alt="3D lunar-inspired constellation artwork representing Assignment Nepal tutoring, proofreading, planning, referencing, and research guidance services"
               fill
               sizes="(min-width: 768px) 45vw, 100vw"
               className="object-cover"

@@ -61,13 +61,18 @@ export default async function Home() {
   return (
     <>
       <JsonLd data={organizationSchema()} />
-      <section className="relative overflow-hidden px-4 pb-16 pt-16 md:px-6 md:pb-24 md:pt-24">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <h1 className="max-w-5xl text-4xl font-black leading-[1.05] text-white md:text-6xl">
+      <section className="lunar-hero relative overflow-hidden px-4 pb-16 pt-14 md:px-6 md:pb-24 md:pt-20">
+        <div className="absolute inset-0 -z-10">
+          <div className="lunar-grid absolute inset-0" />
+          <div className="lunar-void absolute left-1/2 top-1/2 h-[44rem] w-[44rem] -translate-x-1/2 -translate-y-1/2 rounded-full" />
+        </div>
+        <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative z-10">
+            <div className="lunar-kicker mb-8">BEGIN STUDY EXPERIENCE</div>
+            <h1 className="max-w-4xl text-[clamp(2.25rem,5vw,4.9rem)] font-black uppercase leading-[0.9] tracking-[-0.055em] text-white">
               Academic Support for Students in Foreign-Affiliated Colleges in Nepal
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300 md:text-xl">
+            <p className="mt-7 max-w-2xl text-base leading-8 text-slate-300 md:text-xl">
               Explore colleges, programmes, subjects, and module structures, and get ethical support through tutoring, feedback,
               proofreading, referencing help, and study guidance.
             </p>
@@ -77,7 +82,7 @@ export default async function Home() {
                 Get Study Guidance
               </LinkButton>
             </div>
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/8 px-4 py-2 text-sm font-medium text-cyan-100">
+            <div className="mt-6 inline-flex max-w-full items-center gap-2 rounded-full border border-white/14 bg-white/8 px-4 py-2 text-xs font-medium text-cyan-100 sm:text-sm">
               <ShieldCheck className="h-4 w-4" />
               We support learning. We do not complete assessed work for submission.
             </div>
@@ -93,19 +98,35 @@ export default async function Home() {
       <section className="mx-auto max-w-7xl px-4 py-10 md:px-6">
         <div className="grid gap-5 lg:grid-cols-3">
           <VisualFeature
-            image="/images/directory-campus.svg"
+            image="/images/lunar-inspired/study-gallery-lab.png"
             title="College directory visuals"
             text="Compare colleges, university partners, cities, programmes, and verification notes through a cleaner research-first interface."
           />
           <VisualFeature
-            image="/images/services-liquid-icons.svg"
+            image="/images/lunar-inspired/services-constellation.png"
             title="3D study-support system"
             text="Explore tutoring, planning, referencing, proofreading, and draft feedback through a premium glass education interface."
           />
           <VisualFeature
-            image="/images/resources-visual.svg"
+            image="/images/lunar-inspired/contact-orbit.png"
             title="Academic resource hub"
             text="Read practical guides for study skills, module planning, referencing, academic integrity, and career decisions."
+          />
+        </div>
+      </section>
+
+      <section className="lunar-editorial mx-auto max-w-7xl px-4 py-20 md:px-6 md:py-28">
+        <div className="lunar-kicker">INSPIRED BY CLARITY, DESIGNED FOR LEARNING</div>
+        <h2 className="mt-8 max-w-5xl text-[clamp(2.6rem,7vw,7rem)] font-black uppercase leading-[0.9] tracking-[-0.06em] text-white">
+          In a world full of briefs, own your learning.
+        </h2>
+        <div className="mt-12 overflow-hidden rounded-[2.4rem] border border-white/12 bg-white/5">
+          <Image
+            src="/images/lunar-inspired/study-gallery-lab.png"
+            alt="3D module atlas artwork for Assignment Nepal college and programme discovery"
+            width={1400}
+            height={900}
+            className="h-auto w-full"
           />
         </div>
       </section>
@@ -158,11 +179,12 @@ export default async function Home() {
         <div className="visual-split mb-8 grid items-center gap-8 overflow-hidden rounded-[2rem] border border-white/12 bg-white/6 p-5 md:grid-cols-[0.9fr_1.1fr] md:p-7">
           <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem]">
             <Image
-              src="/images/services-liquid-icons.svg"
-              alt="3D liquid-glass icons for Assignment Nepal academic support services"
+              src="/images/lunar-inspired/services-constellation.png"
+              alt="3D constellation artwork for Assignment Nepal academic support services"
               fill
               sizes="(min-width: 768px) 45vw, 100vw"
               className="object-cover"
+              loading="eager"
             />
           </div>
           <div>

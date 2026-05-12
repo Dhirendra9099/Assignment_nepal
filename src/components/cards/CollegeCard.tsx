@@ -10,7 +10,7 @@ export function CollegeCard({ college }: { college: any }) {
     <GlassCard as="article" className="flex h-full flex-col">
       <div className="card-media depth-lift mb-5">
         <Image
-          src="/images/directory-campus.svg"
+          src="/images/lunar-inspired/study-gallery-lab.png"
           alt={`Abstract 3D directory visual for ${college.name}`}
           fill
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
