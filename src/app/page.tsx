@@ -11,6 +11,8 @@ import { HeroVisual } from "@/components/site/HeroVisual";
 import { JsonLd } from "@/components/site/JsonLd";
 import { SearchPanel } from "@/components/site/SearchPanel";
 import { TrustBanner } from "@/components/site/TrustBanner";
+import { CardArt } from "@/components/ui/CardArt";
+import { card3dAssets, getSubjectVisual } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER } from "@/lib/constants";
 import { getBlogPosts, getFeaturedColleges, getForeignUniversities, getProgrammes, getServices, getSubjectAreas, getTestimonials } from "@/lib/repository";
 import { createMetadata, organizationSchema } from "@/lib/seo";
@@ -30,6 +32,17 @@ const whyChoose = [
   "Ethical academic integrity policy",
   "Fast response",
   "Mobile-first support",
+];
+
+const whyChooseArt = [
+  card3dAssets.nepalEducationRibbon,
+  card3dAssets.foreignUniversityGlobe,
+  card3dAssets.moduleRoadmap,
+  card3dAssets.referencingBooks,
+  card3dAssets.aiNeuralBrain,
+  card3dAssets.cyberSecurityShield,
+  card3dAssets.contactSupportPhone,
+  card3dAssets.computingLaptop,
 ];
 
 export default async function Home() {
@@ -98,17 +111,17 @@ export default async function Home() {
       <section className="mx-auto max-w-7xl px-4 py-10 md:px-6">
         <div className="grid gap-5 lg:grid-cols-3">
           <VisualFeature
-            image="/images/lunar-inspired/study-gallery-lab.png"
+            image={card3dAssets.collegeCampus}
             title="College directory visuals"
             text="Compare colleges, university partners, cities, programmes, and verification notes through a cleaner research-first interface."
           />
           <VisualFeature
-            image="/images/lunar-inspired/services-constellation.png"
+            image={card3dAssets.modulePlanningBoard}
             title="3D study-support system"
             text="Explore tutoring, planning, referencing, proofreading, and draft feedback through a premium glass education interface."
           />
           <VisualFeature
-            image="/images/lunar-inspired/contact-orbit.png"
+            image={card3dAssets.blogResourceNotebook}
             title="Academic resource hub"
             text="Read practical guides for study skills, module planning, referencing, academic integrity, and career decisions."
           />
@@ -164,6 +177,15 @@ export default async function Home() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {subjectAreas.slice(0, 10).map((subject: any) => (
             <a key={subject.slug} href={`/subjects/${subject.slug}`} className="glass-panel rounded-3xl p-5 transition hover:-translate-y-1 hover:bg-white/12">
+              <div className="subject-mini-art mb-4">
+                <Image
+                  src={getSubjectVisual(subject)}
+                  alt={`3D ${subject.name} subject visual`}
+                  fill
+                  sizes="(min-width: 1024px) 18vw, (min-width: 640px) 45vw, 100vw"
+                  className="subject-mini-object"
+                />
+              </div>
               <h3 className="text-lg font-bold text-white">{subject.name}</h3>
               <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-300">{subject.description}</p>
             </a>
@@ -179,11 +201,11 @@ export default async function Home() {
         <div className="visual-split mb-8 grid items-center gap-8 overflow-hidden rounded-[2rem] border border-white/12 bg-white/6 p-5 md:grid-cols-[0.9fr_1.1fr] md:p-7">
           <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem]">
             <Image
-              src="/images/lunar-inspired/services-constellation.png"
+              src={card3dAssets.modulePlanningBoard}
               alt="3D constellation artwork for Assignment Nepal academic support services"
               fill
               sizes="(min-width: 768px) 45vw, 100vw"
-              className="object-cover"
+              className="visual-feature-object"
               loading="eager"
             />
           </div>
@@ -213,8 +235,9 @@ export default async function Home() {
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
-            {whyChoose.map((item) => (
+            {whyChoose.map((item, index) => (
               <GlassCard key={item} className="flex items-center gap-3 rounded-2xl p-4">
+                <CardArt src={whyChooseArt[index % whyChooseArt.length]} alt="" compact />
                 <CheckCircle2 className="h-5 w-5 shrink-0 text-cyan-200" />
                 <span className="text-sm font-semibold text-white">{item}</span>
               </GlassCard>
@@ -230,6 +253,7 @@ export default async function Home() {
         <div className="grid gap-5 md:grid-cols-3">
           {testimonials.map((testimonial: any) => (
             <GlassCard key={testimonial.name} as="article">
+              <CardArt src={card3dAssets.faqHelpOrb} alt="" compact className="mb-4" />
               <p className="text-sm leading-7 text-slate-200">"{testimonial.content}"</p>
               <p className="mt-5 text-sm font-bold text-white">{testimonial.name}</p>
               <p className="text-xs text-slate-400">{testimonial.role}</p>
@@ -270,7 +294,7 @@ function VisualFeature({ image, title, text }: { image: string; title: string; t
   return (
     <article className="visual-feature depth-lift">
       <div className="relative aspect-[16/10] overflow-hidden rounded-[1.35rem]">
-        <Image src={image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" loading="eager" />
+        <Image src={image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="visual-feature-object" loading="eager" />
       </div>
       <h2 className="mt-4 text-lg font-bold text-white">{title}</h2>
       <p className="mt-2 text-sm leading-6 text-slate-300">{text}</p>

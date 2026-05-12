@@ -361,7 +361,7 @@ export const programmes = [
 }));
 
 export const services = [
-  ["Concept Tutoring", "concept-tutoring", "Understand difficult topics through guided explanation and examples.", "We explain module concepts, help students practise problems, review learning outcomes, and build confidence without completing assessed work.", "Explaining concepts, practice questions, reading guidance, study skills, and revision planning.", "Writing full assignments, providing exam answers, impersonation, or promising grades.", "GraduationCap"],
+  ["Concept Tutoring", "concept-tutoring", "Understand difficult topics through guided explanation and examples.", "We explain module concepts, help students practise problems, review learning outcomes, and build confidence without completing assessed work.", "Explaining concepts, practice questions, reading guidance, study skills, and revision planning.", "Writing full assignments, completing exams or quizzes, impersonation, or promising grades.", "GraduationCap"],
   ["Assignment Brief Explanation", "assignment-brief-explanation", "Break down briefs, marking criteria, and learning outcomes.", "We help students interpret what their brief is asking, identify deliverables, and plan their own approach ethically.", "Requirement explanation, task breakdowns, rubrics, and planning checklists.", "Producing assessed coursework text or telling students exactly what to submit.", "FileQuestion"],
   ["Assignment Planning", "assignment-planning", "Create a responsible outline and timeline for your own work.", "We support structure, milestones, research direction, and time planning so students can produce their own work with clarity.", "Outlines, schedules, reading lists, section planning, and task prioritisation.", "Completing coursework on behalf of students or guaranteeing academic outcomes.", "CalendarCheck"],
   ["Research Guidance", "research-guidance", "Find credible directions, methods, and source strategies.", "We guide students in selecting research questions, evaluating sources, choosing methods, and documenting evidence responsibly.", "Research direction, source evaluation, methodology discussion, and ethics awareness.", "Fabricating references, inventing data, or writing final research reports for submission.", "Search"],
@@ -454,7 +454,7 @@ export const faqs = [
   },
   {
     question: "Can you help with exams?",
-    answer: "We can support ethical revision, concept explanation, and practice planning. We do not provide live exam help, quiz completion, exam answers, or impersonation.",
+    answer: "We can support ethical revision, concept explanation, and practice planning. We do not provide live exam help, quiz completion, unauthorized assessment support, or impersonation.",
     category: "Services",
     order: 6,
   },

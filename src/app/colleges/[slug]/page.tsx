@@ -1,11 +1,13 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarCheck, ExternalLink, MapPin } from "lucide-react";
+import { ProgrammeCard } from "@/components/cards/ProgrammeCard";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { JsonLd } from "@/components/site/JsonLd";
 import { Badge } from "@/components/ui/Badge";
+import { CardArt } from "@/components/ui/CardArt";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { LinkButton } from "@/components/ui/Button";
+import { card3dAssets, getCollegeVisual } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER, VERIFICATION_NOTE } from "@/lib/constants";
 import { getCollege, getProgrammes } from "@/lib/repository";
 import { breadcrumbSchema, createMetadata } from "@/lib/seo";
@@ -29,6 +31,7 @@ export default async function CollegeDetailPage({ params }: { params: Promise<{ 
 
   const allProgrammes = await getProgrammes();
   const collegeProgrammes = allProgrammes.filter((programme: any) => programme.college?.slug === college.slug || programme.collegeSlug === college.slug);
+  const collegeVisual = getCollegeVisual(college);
 
   return (
     <>
@@ -54,6 +57,7 @@ export default async function CollegeDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
           <GlassCard>
+            <CardArt src={collegeVisual} alt="" className="mb-5" />
             <h2 className="text-2xl font-bold text-white">Foreign university affiliation(s)</h2>
             <div className="mt-4 flex flex-wrap gap-2">
               {(college.universityNames || []).map((name: string) => (
@@ -75,6 +79,7 @@ export default async function CollegeDetailPage({ params }: { params: Promise<{ 
         </div>
 
         <div className="mt-10 rounded-[1.5rem] border border-amber-200/20 bg-amber-200/10 p-5 text-sm leading-7 text-amber-50">
+          <CardArt src={card3dAssets.moduleRoadmap} alt="" compact className="mb-4" />
           {VERIFICATION_NOTE}
         </div>
 
@@ -82,14 +87,7 @@ export default async function CollegeDetailPage({ params }: { params: Promise<{ 
           <h2 className="text-3xl font-bold text-white">Programmes offered</h2>
           <div className="mt-6 grid gap-5 md:grid-cols-2">
             {collegeProgrammes.map((programme: any) => (
-              <GlassCard key={programme.slug}>
-                <Badge>{programme.degreeLevel}</Badge>
-                <h3 className="mt-4 text-xl font-bold text-white">{programme.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{programme.assessmentStyleNotes}</p>
-                <Link href={`/programmes/${programme.slug}`} className="mt-5 inline-flex text-sm font-semibold text-cyan-100 hover:text-white">
-                  View modules and support options
-                </Link>
-              </GlassCard>
+              <ProgrammeCard key={programme.slug} programme={programme} />
             ))}
           </div>
         </section>

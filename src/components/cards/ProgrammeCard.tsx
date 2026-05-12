@@ -1,11 +1,24 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Building2, Clock3 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { getProgrammeVisual } from "@/lib/card-assets";
 
 export function ProgrammeCard({ programme }: { programme: any }) {
+  const visual = getProgrammeVisual(programme);
   return (
     <GlassCard as="article" className="h-full">
+      <div className="card-media depth-lift mb-5">
+        <Image
+          src={visual}
+          alt={`3D programme visual for ${programme.title}`}
+          fill
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="card-media-object"
+        />
+        <div className="card-media-label">{programme.discipline}</div>
+      </div>
       <div className="mb-4 flex flex-wrap gap-2">
         <Badge>{programme.degreeLevel}</Badge>
         <Badge>{programme.discipline}</Badge>

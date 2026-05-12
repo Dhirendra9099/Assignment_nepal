@@ -3,18 +3,20 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { getBlogVisual } from "@/lib/card-assets";
 import { formatDate } from "@/lib/utils";
 
 export function BlogCard({ post }: { post: any }) {
+  const visual = getBlogVisual(post);
   return (
     <GlassCard as="article" className="h-full">
       <div className="card-media depth-lift mb-4">
         <Image
-          src="/images/lunar-inspired/services-constellation.png"
+          src={visual}
           alt={`3D academic resource visual for ${post.title}`}
           fill
           sizes="(min-width: 768px) 33vw, 100vw"
-          className="object-cover"
+          className="card-media-object"
         />
       </div>
       {post.category ? <Badge>{post.category}</Badge> : null}

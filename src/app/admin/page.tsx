@@ -1,8 +1,12 @@
 import { AdminShell } from "@/components/admin/AdminShell";
+import { CardArt } from "@/components/ui/CardArt";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { adminResources } from "@/lib/admin-config";
 import { getAdminSession } from "@/lib/auth";
+import { card3dAssets } from "@/lib/card-assets";
 import { prisma } from "@/lib/prisma";
+
+const adminArt = Object.values(card3dAssets);
 
 export default async function AdminDashboardPage() {
   const admin = await getAdminSession();
@@ -24,8 +28,9 @@ export default async function AdminDashboardPage() {
         <p className="mt-2 text-sm text-slate-300">Signed in as {admin?.name} ({admin?.role}). Manage content, source verification, enquiries, and policy pages.</p>
       </div>
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {counts.map((item) => (
+        {counts.map((item, index) => (
           <GlassCard key={item.slug}>
+            <CardArt src={adminArt[index % adminArt.length]} alt="" compact className="mb-4" />
             <p className="text-sm text-slate-400">{item.label}</p>
             <p className="mt-3 text-4xl font-black text-white">{item.count}</p>
             <a href={`/admin/${item.slug}`} className="mt-5 inline-flex text-sm font-semibold text-cyan-100 hover:text-white">

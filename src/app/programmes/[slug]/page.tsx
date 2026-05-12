@@ -4,8 +4,10 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { JsonLd } from "@/components/site/JsonLd";
 import { ModuleAccordion } from "@/components/site/ModuleAccordion";
 import { Badge } from "@/components/ui/Badge";
+import { CardArt } from "@/components/ui/CardArt";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { LinkButton } from "@/components/ui/Button";
+import { card3dAssets, getProgrammeVisual } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER, VERIFICATION_NOTE } from "@/lib/constants";
 import { getProgramme } from "@/lib/repository";
 import { breadcrumbSchema, createMetadata } from "@/lib/seo";
@@ -26,6 +28,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
   const { slug } = await params;
   const programme = await getProgramme(slug);
   if (!programme) notFound();
+  const programmeVisual = getProgrammeVisual(programme);
 
   return (
     <>
@@ -50,6 +53,7 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
             </div>
           </div>
           <GlassCard>
+            <CardArt src={programmeVisual} alt="" className="mb-5" />
             <h2 className="text-2xl font-bold text-white">Programme snapshot</h2>
             <dl className="mt-5 space-y-4 text-sm">
               <Row label="College" value={programme.college?.name || "Verify with source"} />
@@ -67,10 +71,12 @@ export default async function ProgrammeDetailPage({ params }: { params: Promise<
 
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
           <GlassCard>
+            <CardArt src={card3dAssets.moduleRoadmap} alt="" compact className="mb-4" />
             <h2 className="text-2xl font-bold text-white">Assessment style notes</h2>
             <p className="mt-4 text-sm leading-7 text-slate-300">{programme.assessmentStyleNotes}</p>
           </GlassCard>
           <GlassCard>
+            <CardArt src={card3dAssets.businessBriefcase} alt="" compact className="mb-4" />
             <h2 className="text-2xl font-bold text-white">Career relevance</h2>
             <p className="mt-4 text-sm leading-7 text-slate-300">{programme.careerNotes}</p>
           </GlassCard>

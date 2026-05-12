@@ -1,5 +1,7 @@
 import { CheckCircle2 } from "lucide-react";
+import { CardArt } from "@/components/ui/CardArt";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { card3dAssets } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER } from "@/lib/constants";
 import { createMetadata } from "@/lib/seo";
 
@@ -10,10 +12,10 @@ export const metadata = createMetadata({
 });
 
 const principles = [
-  "Students remain the author of their own work.",
-  "Support is focused on understanding, planning, feedback, proofreading, referencing, and study skills.",
-  "College and module data is source-aware and correction-friendly.",
-  "Services are designed for Nepalese students navigating foreign-affiliated programme expectations.",
+  { text: "Students remain the author of their own work.", art: card3dAssets.cyberSecurityShield },
+  { text: "Support is focused on understanding, planning, feedback, proofreading, referencing, and study skills.", art: card3dAssets.modulePlanningBoard },
+  { text: "College and module data is source-aware and correction-friendly.", art: card3dAssets.collegeCampus },
+  { text: "Services are designed for Nepalese students navigating foreign-affiliated programme expectations.", art: card3dAssets.nepalEducationRibbon },
 ];
 
 export default function AboutPage() {
@@ -25,9 +27,12 @@ export default function AboutPage() {
       </p>
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         {principles.map((item) => (
-          <GlassCard key={item} className="flex items-start gap-3">
-            <CheckCircle2 className="mt-0.5 h-5 w-5 text-cyan-200" />
-            <p className="text-sm leading-7 text-slate-200">{item}</p>
+          <GlassCard key={item.text} className="flex items-center gap-4">
+            <CardArt src={item.art} alt="" compact />
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-200" />
+              <p className="text-sm leading-7 text-slate-200">{item.text}</p>
+            </div>
           </GlassCard>
         ))}
       </div>

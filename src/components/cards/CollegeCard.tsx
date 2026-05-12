@@ -3,18 +3,20 @@ import Image from "next/image";
 import { ArrowRight, CalendarCheck, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { getCollegeVisual } from "@/lib/card-assets";
 import { formatDate } from "@/lib/utils";
 
 export function CollegeCard({ college }: { college: any }) {
+  const visual = getCollegeVisual(college);
   return (
     <GlassCard as="article" className="flex h-full flex-col">
       <div className="card-media depth-lift mb-5">
         <Image
-          src="/images/lunar-inspired/study-gallery-lab.png"
-          alt={`Abstract 3D directory visual for ${college.name}`}
+          src={visual}
+          alt={`3D study directory visual for ${college.name}`}
           fill
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover"
+          className="card-media-object"
         />
         <div className="card-media-label">{college.city}</div>
       </div>

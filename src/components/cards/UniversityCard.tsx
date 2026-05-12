@@ -3,18 +3,20 @@ import Image from "next/image";
 import { ArrowRight, Globe2 } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Badge } from "@/components/ui/Badge";
+import { getUniversityVisual } from "@/lib/card-assets";
 import { formatDate } from "@/lib/utils";
 
 export function UniversityCard({ university }: { university: any }) {
+  const visual = getUniversityVisual(university);
   return (
     <GlassCard as="article" className="h-full">
       <div className="card-media depth-lift mb-5">
         <Image
-          src="/images/lunar-inspired/study-gallery-lab.png"
-          alt={`Abstract 3D foreign university partner visual for ${university.name}`}
+          src={visual}
+          alt={`3D foreign university partner visual for ${university.name}`}
           fill
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover"
+          className="card-media-object"
         />
         <div className="card-media-icon">
           <Globe2 className="h-5 w-5" />

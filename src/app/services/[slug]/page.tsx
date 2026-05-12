@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Badge } from "@/components/ui/Badge";
+import { CardArt } from "@/components/ui/CardArt";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { card3dAssets, getServiceVisual } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER } from "@/lib/constants";
 import { getService } from "@/lib/repository";
 import { createMetadata } from "@/lib/seo";
@@ -22,6 +24,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const { slug } = await params;
   const service = await getService(slug);
   if (!service) notFound();
+  const serviceVisual = getServiceVisual(service);
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 md:px-6">
@@ -31,6 +34,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
       <div className="mt-10 grid gap-5 lg:grid-cols-2">
         <GlassCard>
+          <CardArt src={serviceVisual} alt="" compact className="mb-4" />
           <div className="flex items-center gap-3 text-emerald-100">
             <CheckCircle2 className="h-6 w-6" />
             <h2 className="text-2xl font-bold text-white">Allowed</h2>
@@ -38,6 +42,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <p className="mt-4 text-sm leading-7 text-slate-300">{service.allowedScope}</p>
         </GlassCard>
         <GlassCard>
+          <CardArt src={card3dAssets.cyberSecurityShield} alt="" compact className="mb-4" />
           <div className="flex items-center gap-3 text-red-100">
             <XCircle className="h-6 w-6" />
             <h2 className="text-2xl font-bold text-white">Not allowed</h2>

@@ -1,4 +1,6 @@
+import { CardArt } from "@/components/ui/CardArt";
 import { Badge } from "@/components/ui/Badge";
+import { getProgrammeVisual } from "@/lib/card-assets";
 
 const support = ["Concept explanation", "Reading guidance", "Referencing help", "Draft feedback", "Presentation support"];
 
@@ -18,8 +20,9 @@ export function ModuleAccordion({ modules }: { modules: any[] }) {
           <div className="mt-4 grid gap-4">
             {items.map((moduleItem) => (
               <div key={`${group}-${moduleItem.slug}`} className="rounded-2xl border border-white/10 bg-white/7 p-4">
-                <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
-                  <div>
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <CardArt src={getProgrammeVisual(moduleItem)} alt="" compact />
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-base font-bold text-white">{moduleItem.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-slate-300">{moduleItem.description}</p>
                   </div>

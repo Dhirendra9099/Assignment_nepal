@@ -15,6 +15,7 @@ import {
   Search,
 } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { getServiceVisual } from "@/lib/card-assets";
 
 const icons: Record<string, any> = {
   GraduationCap,
@@ -33,15 +34,16 @@ const icons: Record<string, any> = {
 
 export function ServiceCard({ service }: { service: any }) {
   const Icon = icons[service.icon] || GraduationCap;
+  const visual = getServiceVisual(service);
   return (
     <GlassCard as="article" className="h-full">
       <div className="service-media depth-lift mb-5">
         <Image
-          src="/images/lunar-inspired/services-constellation.png"
-          alt=""
+          src={visual}
+          alt={`3D service visual for ${service.title}`}
           fill
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover"
+          className="card-media-object"
         />
         <div className="service-media-icon">
           <Icon className="h-6 w-6" />

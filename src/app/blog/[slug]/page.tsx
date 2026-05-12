@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { JsonLd } from "@/components/site/JsonLd";
 import { Badge } from "@/components/ui/Badge";
+import { getBlogVisual } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER, SITE_URL } from "@/lib/constants";
 import { getBlogPost } from "@/lib/repository";
 import { createMetadata } from "@/lib/seo";
@@ -24,6 +26,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   const post = await getBlogPost(slug);
   if (!post) notFound();
   const paragraphs = post.content.split("\n").filter(Boolean);
+  const visual = getBlogVisual(post);
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-14 md:px-6">
@@ -43,7 +46,9 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
       <p className="mt-4 text-sm text-slate-400">
         By {post.author} · {formatDate(post.publishedAt || post.createdAt)}
       </p>
-      <div className="mt-8 h-64 rounded-[2rem] border border-white/10 bg-gradient-to-br from-cyan-300/18 via-violet-300/14 to-pink-300/10" />
+      <div className="card-media depth-lift mt-8 h-64 rounded-[2rem]">
+        <Image src={visual} alt={`3D blog resource visual for ${post.title}`} fill sizes="(min-width: 768px) 768px, 100vw" className="card-media-object" priority />
+      </div>
       <article className="prose-policy mt-10">
         {paragraphs.map((paragraph: string) => (
           <p key={paragraph}>{paragraph}</p>

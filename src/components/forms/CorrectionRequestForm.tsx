@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { CardArt } from "@/components/ui/CardArt";
+import { card3dAssets } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER } from "@/lib/constants";
 import { submitToFormSubmit } from "@/lib/formsubmit-client";
 
@@ -74,6 +76,13 @@ export function CorrectionRequestForm() {
   return (
     <form onSubmit={onSubmit} className="glass-panel glass-border rounded-[1.75rem] p-5 md:p-7">
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <div className="mb-6 flex items-center gap-4">
+        <CardArt src={card3dAssets.moduleRoadmap} alt="" compact />
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Source-backed update</p>
+          <p className="mt-1 text-sm leading-6 text-slate-300">Help keep directory information accurate and verified.</p>
+        </div>
+      </div>
       <div className="grid gap-4 md:grid-cols-2">
         <Field name="requesterName" label="Your name" required />
         <Field name="requesterEmail" label="Your email" type="email" required />

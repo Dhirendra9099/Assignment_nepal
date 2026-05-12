@@ -1,4 +1,6 @@
 import { CorrectionRequestForm } from "@/components/forms/CorrectionRequestForm";
+import { CardArt } from "@/components/ui/CardArt";
+import { card3dAssets } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER } from "@/lib/constants";
 import { createMetadata } from "@/lib/seo";
 
@@ -16,7 +18,10 @@ export default function CorrectionRequestPage() {
       <p className="mt-5 text-lg leading-8 text-slate-300">
         College, university, programme, and module information can change. Submit a source-backed update and our team will review it before publishing.
       </p>
-      <p className="mt-6 rounded-[1.5rem] border border-cyan-200/20 bg-cyan-200/8 p-5 text-sm leading-7 text-cyan-50">{MANDATORY_DISCLAIMER}</p>
+      <div className="mt-6 flex items-center gap-4 rounded-[1.5rem] border border-cyan-200/20 bg-cyan-200/8 p-5 text-sm leading-7 text-cyan-50">
+        <CardArt src={card3dAssets.moduleRoadmap} alt="" compact />
+        <p>{MANDATORY_DISCLAIMER}</p>
+      </div>
       <div className="mt-8">
         <CorrectionRequestForm />
       </div>

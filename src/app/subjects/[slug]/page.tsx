@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProgrammeCard } from "@/components/cards/ProgrammeCard";
+import { ServiceCard } from "@/components/cards/ServiceCard";
 import { Badge } from "@/components/ui/Badge";
-import { GlassCard } from "@/components/ui/GlassCard";
 import { LinkButton } from "@/components/ui/Button";
 import { getServices, getSubject } from "@/lib/repository";
 import { createMetadata } from "@/lib/seo";
@@ -46,13 +45,7 @@ export default async function SubjectDetailPage({ params }: { params: Promise<{ 
         <h2 className="text-3xl font-bold text-white">Support available</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {services.slice(0, 6).map((service: any) => (
-            <GlassCard key={service.slug}>
-              <h3 className="text-xl font-bold text-white">{service.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{service.shortDescription}</p>
-              <Link href={`/services/${service.slug}`} className="mt-5 inline-flex text-sm font-semibold text-cyan-100 hover:text-white">
-                Read scope
-              </Link>
-            </GlassCard>
+            <ServiceCard key={service.slug} service={service} />
           ))}
         </div>
       </section>

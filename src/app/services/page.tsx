@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { ServiceCard } from "@/components/cards/ServiceCard";
 import { TrustBanner } from "@/components/site/TrustBanner";
+import { CardArt } from "@/components/ui/CardArt";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { card3dAssets } from "@/lib/card-assets";
 import { MANDATORY_DISCLAIMER } from "@/lib/constants";
 import { getServices } from "@/lib/repository";
 import { createMetadata } from "@/lib/seo";
@@ -51,11 +53,11 @@ export default async function ServicesPage() {
           </div>
           <div className="depth-lift relative aspect-[16/10] overflow-hidden rounded-[1.5rem]">
             <Image
-              src="/images/lunar-inspired/services-constellation.png"
+              src={card3dAssets.modulePlanningBoard}
               alt="3D lunar-inspired constellation artwork representing Assignment Nepal tutoring, proofreading, planning, referencing, and research guidance services"
               fill
               sizes="(min-width: 768px) 45vw, 100vw"
-              className="object-cover"
+              className="visual-feature-object"
               priority
             />
           </div>
@@ -68,6 +70,7 @@ export default async function ServicesPage() {
 
         <div className="mt-14 grid gap-5 lg:grid-cols-2">
           <GlassCard>
+            <CardArt src={card3dAssets.researchMicroscope} alt="" compact className="mb-4" />
             <h2 className="text-2xl font-bold text-white">Allowed support</h2>
             <ul className="mt-5 space-y-3">
               {allowed.map((item) => (
@@ -76,6 +79,7 @@ export default async function ServicesPage() {
             </ul>
           </GlassCard>
           <GlassCard>
+            <CardArt src={card3dAssets.cyberSecurityShield} alt="" compact className="mb-4" />
             <h2 className="text-2xl font-bold text-white">Not allowed</h2>
             <ul className="mt-5 space-y-3">
               {forbidden.map((item) => (
