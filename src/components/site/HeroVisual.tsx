@@ -16,6 +16,20 @@ export function HeroVisual() {
         />
       </div>
 
+      <div className="hero-cutout-shell pointer-events-none absolute bottom-8 left-1/2 z-10 w-[112%] max-w-[720px] -translate-x-1/2 md:bottom-2 md:w-[118%]">
+        <div className="hero-cutout-depth">
+          <Image
+            src="/images/generated/assignment-nepal-student-cutout.png"
+            alt="AI-generated Nepalese student using a laptop with floating glass academic panels"
+            width={1536}
+            height={1024}
+            priority
+            sizes="(min-width: 1024px) 56vw, 112vw"
+            className="relative z-10 h-auto w-full"
+          />
+        </div>
+      </div>
+
       <div className="kinetic-panel glass-panel glass-border float-soft absolute left-1 top-8 rounded-3xl p-4 md:left-8 md:top-18">
         <div className="flex items-center gap-2 text-sm font-semibold text-cyan-50">
           <Sparkles className="h-4 w-4 text-pink-100" />

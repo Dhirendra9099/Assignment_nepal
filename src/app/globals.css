@@ -196,6 +196,7 @@ textarea {
 }
 
 .hero-image-frame {
+  z-index: 2;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.035)),
     rgba(0, 0, 0, 0.6);
@@ -205,6 +206,41 @@ textarea {
     inset 0 1px 0 rgba(255, 255, 255, 0.22);
   transform: rotateX(6deg) rotateY(-10deg) rotateZ(1deg);
   transform-origin: center;
+}
+
+.hero-cutout-shell {
+  transform-style: preserve-3d;
+}
+
+.hero-cutout-depth {
+  position: relative;
+  isolation: isolate;
+  transform: rotateX(4deg) rotateY(-8deg) translateZ(90px);
+  transform-style: preserve-3d;
+  filter:
+    drop-shadow(0 48px 48px rgba(0, 0, 0, 0.72))
+    drop-shadow(0 0 34px rgba(34, 211, 238, 0.2));
+}
+
+.hero-cutout-depth::before {
+  content: "";
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  bottom: 7%;
+  z-index: 0;
+  height: 17%;
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at center, rgba(34, 211, 238, 0.26), transparent 70%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.68), transparent 64%);
+  filter: blur(22px);
+  opacity: 0.78;
+  transform: translateZ(-40px) rotateX(68deg);
+}
+
+.hero-cutout-depth img {
+  transform: translateZ(44px);
 }
 
 .hero-image-frame::after,
@@ -223,6 +259,7 @@ textarea {
 }
 
 .kinetic-panel {
+  z-index: 20;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28), 0 0 30px rgba(34, 211, 238, 0.12);
   transform: translateZ(70px);
 }
@@ -318,6 +355,29 @@ textarea {
   backdrop-filter: blur(22px) saturate(145%);
 }
 
+.contact-hero-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.contact-hero-backdrop {
+  opacity: 0.74;
+  transform: scale(1.03);
+}
+
+.contact-student-layer {
+  position: absolute;
+  left: 50%;
+  bottom: -8%;
+  z-index: 3;
+  width: 112%;
+  height: auto;
+  transform: translateX(-50%) translateZ(58px) scale(1.02);
+  filter:
+    drop-shadow(0 34px 40px rgba(0, 0, 0, 0.72))
+    drop-shadow(0 0 28px rgba(34, 211, 238, 0.16));
+}
+
 .text-balance {
   text-wrap: balance;
 }
@@ -345,6 +405,10 @@ textarea {
     animation: hero-drift 9s ease-in-out infinite;
   }
 
+  .hero-cutout-depth {
+    animation: student-float 8.5s ease-in-out infinite;
+  }
+
   .lunar-orbit {
     animation: orbit-turn 18s linear infinite;
   }
@@ -354,6 +418,12 @@ textarea {
   .visual-feature img,
   .visual-split img {
     transition: transform 700ms ease;
+  }
+}
+
+@media (max-width: 640px) and (prefers-reduced-motion: no-preference) {
+  .hero-cutout-depth {
+    animation-name: student-float-mobile;
   }
 }
 
@@ -403,6 +473,26 @@ textarea {
   }
 }
 
+@keyframes student-float {
+  0%,
+  100% {
+    transform: rotateX(4deg) rotateY(-8deg) translate3d(0, 0, 90px);
+  }
+  50% {
+    transform: rotateX(2deg) rotateY(-4deg) translate3d(0, -18px, 112px);
+  }
+}
+
+@keyframes student-float-mobile {
+  0%,
+  100% {
+    transform: rotateX(2deg) rotateY(-3deg) translate3d(0, 0, 56px);
+  }
+  50% {
+    transform: rotateX(1deg) rotateY(-1deg) translate3d(0, -10px, 68px);
+  }
+}
+
 @keyframes orbit-turn {
   to {
     rotate: 360deg;
@@ -420,6 +510,18 @@ textarea {
 
   .hero-image-frame {
     transform: rotateX(3deg) rotateY(-2deg);
+  }
+
+  .hero-cutout-depth {
+    transform: rotateX(2deg) rotateY(-3deg) translateZ(56px);
+    filter:
+      drop-shadow(0 32px 34px rgba(0, 0, 0, 0.7))
+      drop-shadow(0 0 22px rgba(34, 211, 238, 0.18));
+  }
+
+  .contact-student-layer {
+    bottom: -4%;
+    width: 118%;
   }
 
   .kinetic-panel {
