@@ -51,6 +51,19 @@ const videoQueries = [
 
 const sfxQueries = ["whoosh transition", "soft click", "camera shutter", "success chime", "paper flip"];
 
+const gifQueries = [
+  "study motivation",
+  "deadline reminder",
+  "graduation cap",
+  "research notes",
+  "typing laptop",
+  "success celebration",
+  "book study",
+  "check mark",
+  "sparkle education",
+  "presentation",
+];
+
 function loadDotEnv() {
   const envPath = path.join(ROOT, ".env");
   if (!fs.existsSync(envPath)) return;
@@ -284,6 +297,38 @@ async function collectFreesoundSfx(manifest, query, limit = 2) {
   }
 }
 
+async function collectGiphyOverlays(manifest, query, limit = 2) {
+  const key = firstKey("GIPHY_API_KEY");
+  if (!key) return;
+
+  const url = new URL("https://api.giphy.com/v1/stickers/search");
+  url.searchParams.set("api_key", key);
+  url.searchParams.set("q", query);
+  url.searchParams.set("limit", String(limit));
+  url.searchParams.set("rating", "g");
+  url.searchParams.set("lang", "en");
+
+  const json = await fetchJson(url);
+  for (const item of json.data || []) {
+    const selected =
+      item.images?.fixed_height_small?.url ||
+      item.images?.downsized_medium?.url ||
+      item.images?.original?.url;
+    if (!selected) continue;
+    const filePath = path.join(STOCK_ROOT, "gifs", `giphy-${slug(query)}-${item.id}.gif`);
+    await downloadFile(selected, filePath);
+    manifest.push({
+      provider: "giphy",
+      type: "gifs",
+      query,
+      localPath: path.relative(ROOT, filePath),
+      sourceUrl: item.url,
+      title: item.title,
+      license: "GIPHY API",
+    });
+  }
+}
+
 async function runSafely(label, fn) {
   try {
     await fn();
@@ -297,7 +342,7 @@ async function main() {
   await mkdir(STOCK_ROOT);
 
   const manifest = [];
-  for (const folder of ["images", "banners", "portraits", "videos", "sfx"]) {
+  for (const folder of ["images", "banners", "portraits", "videos", "sfx", "gifs"]) {
     await mkdir(path.join(STOCK_ROOT, folder));
   }
 
@@ -325,6 +370,10 @@ async function main() {
 
   for (const query of sfxQueries) {
     await runSafely(`Freesound ${query}`, () => collectFreesoundSfx(manifest, query, 2));
+  }
+
+  for (const query of gifQueries) {
+    await runSafely(`Giphy ${query}`, () => collectGiphyOverlays(manifest, query, 2));
   }
 
   const existing = fs.existsSync(MANIFEST_PATH) ? JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8")) : [];
