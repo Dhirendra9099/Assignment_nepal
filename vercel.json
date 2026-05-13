@@ -1,0 +1,28 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/social-publisher/poster-morning",
+      "schedule": "30 3 * * *"
+    },
+    {
+      "path": "/api/cron/social-publisher/poster-midday",
+      "schedule": "30 6 * * *"
+    },
+    {
+      "path": "/api/cron/social-publisher/poster-evening",
+      "schedule": "30 9 * * *"
+    },
+    {
+      "path": "/api/cron/social-publisher/animated-ad-afternoon",
+      "schedule": "30 12 * * *"
+    },
+    {
+      "path": "/api/cron/social-publisher/animated-ad-night",
+      "schedule": "30 14 * * *"
+    },
+    {
+      "path": "/api/cron/social-publisher/banner-prime",
+      "schedule": "30 16 * * *"
+    }
+  ]
+}

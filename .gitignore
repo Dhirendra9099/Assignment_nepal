@@ -43,3 +43,6 @@ next-env.d.ts
 
 # local agent/dev artifacts
 .codex-tmp/
+
+# generated campaign media batches
+campaign-assets/

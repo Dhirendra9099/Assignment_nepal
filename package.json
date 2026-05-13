@@ -10,18 +10,23 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "assets:generate": "node scripts/generate-campaign-assets.mjs",
+    "assets:generate-videos": "python scripts/generate-animated-ads.py --count 60",
+    "assets:upload-drive": "node scripts/upload-campaign-assets-to-drive.mjs"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
+    "googleapis": "^171.4.0",
     "jose": "^6.2.3",
     "lucide-react": "^1.14.0",
     "next": "16.2.6",
     "nodemailer": "^8.0.7",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "sharp": "^0.34.5",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
   },
