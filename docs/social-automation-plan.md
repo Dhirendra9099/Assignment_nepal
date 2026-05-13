@@ -18,7 +18,13 @@ Video rendering, avatar generation, voice synthesis, LUT-style processing, and s
 
 - `scripts/generate-campaign-assets.mjs`
   - Generates 90 poster PNGs and 30 banner PNGs in `campaign-assets/`.
+  - Uses multiple poster/banner layout families so the batch does not repeat the same composition.
   - Uses the attached Assignment Nepal reference direction: navy/red brand, Nepal mountain/stupa/flag cues, service icons, college strip, and CTA blocks.
+
+- `scripts/download-stock-media.mjs`
+  - Downloads a reusable stock pool from configured provider keys in `.env`.
+  - Stores images, banner photos, portrait photos, vertical videos, and attribution/license metadata under `campaign-assets/stock/`.
+  - Pexels and Unsplash assets are used by the current generators when available.
 
 - `scripts/upload-campaign-assets-to-drive.mjs`
   - Uploads generated poster/banner/video files to configured Google Drive folders.
@@ -66,30 +72,36 @@ Cron/security:
 
 ## Operational flow
 
-1. Generate local media:
+1. Download/update the stock media pool:
 
    ```bash
-   npm run assets:generate
+   npm run assets:stock
    ```
 
-2. Add/render animated videos into:
+2. Generate local poster and banner media:
+
+   ```bash
+   npm run assets:generate-static
+   ```
+
+3. Render animated videos into:
 
    ```bash
    npm run assets:generate-videos
    ```
 
-3. Upload to Drive:
+4. Upload to Drive:
 
    ```bash
    npm run assets:upload-drive
    ```
 
-4. Push code to GitHub and deploy on Vercel.
+5. Push code to GitHub and deploy on Vercel.
 
-5. Set all production environment variables in Vercel.
+6. Set all production environment variables in Vercel.
 
-6. Vercel Cron posts from Drive on schedule.
+7. Vercel Cron posts from Drive on schedule.
 
 ## Animated video production note
 
-`scripts/generate-animated-ads.py` creates an offline-ready batch with unique scripts, Edge TTS voices, synthesized background music, animated panels, and illustrated avatar scenes. For fully realistic human avatars, swap the renderer's avatar step to a dedicated generation provider such as Replicate, Creatomate, or another avatar/video API configured in `.env`. The scheduler is independent from the video renderer: as long as final MP4 files are uploaded to the configured Drive animated ads folder, the cron publisher can post them.
+`scripts/generate-animated-ads.py` creates an offline-ready batch with unique scripts, Edge TTS voices, synthesized background music, stock video backgrounds, animated panels, and real stock portrait avatar cards. For fully lip-synced human avatars, swap the renderer's avatar step to a dedicated generation provider such as Replicate, Creatomate, or another avatar/video API configured in `.env`. The scheduler is independent from the video renderer: as long as final MP4 files are uploaded to the configured Drive animated ads folder, the cron publisher can post them.

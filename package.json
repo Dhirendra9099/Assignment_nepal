@@ -11,8 +11,10 @@
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
-    "assets:generate": "node scripts/generate-campaign-assets.mjs",
-    "assets:generate-videos": "python scripts/generate-animated-ads.py --count 60",
+    "assets:stock": "node scripts/download-stock-media.mjs",
+    "assets:generate-static": "node scripts/generate-campaign-assets.mjs",
+    "assets:generate": "node scripts/download-stock-media.mjs && node scripts/generate-campaign-assets.mjs",
+    "assets:generate-videos": "node scripts/download-stock-media.mjs && python scripts/generate-animated-ads.py --count 60",
     "assets:upload-drive": "node scripts/upload-campaign-assets-to-drive.mjs"
   },
   "dependencies": {

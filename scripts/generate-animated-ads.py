@@ -11,12 +11,13 @@ from pathlib import Path
 import edge_tts
 import imageio_ffmpeg
 import numpy as np
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "campaign-assets" / "animated_ads"
 WORK = ROOT / "campaign-assets" / "_video_work"
+STOCK = ROOT / "campaign-assets" / "stock"
 W, H = 1080, 1920
 SR = 44100
 
@@ -50,6 +51,18 @@ COLORS = [
 ]
 
 
+def stock_files(folder: str, extensions: tuple[str, ...]) -> list[Path]:
+    directory = STOCK / folder
+    if not directory.exists():
+        return []
+    return sorted([p for p in directory.iterdir() if p.suffix.lower() in extensions])
+
+
+STOCK_VIDEOS = stock_files("videos", (".mp4", ".mov", ".m4v"))
+STOCK_PORTRAITS = stock_files("portraits", (".jpg", ".jpeg", ".png", ".webp"))
+STOCK_IMAGES = stock_files("images", (".jpg", ".jpeg", ".png", ".webp"))
+
+
 def font(size: int, bold: bool = False):
     candidates = [
         Path(r"C:\Windows\Fonts\arialbd.ttf") if bold else Path(r"C:\Windows\Fonts\arial.ttf"),
@@ -76,6 +89,23 @@ def wrap(draw: ImageDraw.ImageDraw, text: str, fnt: ImageFont.ImageFont, max_w: 
     return lines
 
 
+def cover_crop(img: Image.Image, size: tuple[int, int]) -> Image.Image:
+    img = ImageOps.exif_transpose(img).convert("RGB")
+    sw, sh = size
+    scale = max(sw / img.width, sh / img.height)
+    resized = img.resize((math.ceil(img.width * scale), math.ceil(img.height * scale)), Image.Resampling.LANCZOS)
+    left = max((resized.width - sw) // 2, 0)
+    top = max((resized.height - sh) // 2, 0)
+    return resized.crop((left, top, left + sw, top + sh))
+
+
+def rounded_alpha(size: tuple[int, int], radius: int) -> Image.Image:
+    mask = Image.new("L", size, 0)
+    draw = ImageDraw.Draw(mask)
+    draw.rounded_rectangle((0, 0, size[0], size[1]), radius=radius, fill=255)
+    return mask
+
+
 def draw_shadow(draw: ImageDraw.ImageDraw, xy, text, fnt, fill):
     x, y = xy
     draw.text((x + 3, y + 4), text, font=fnt, fill=(0, 0, 0, 130))
@@ -83,6 +113,20 @@ def draw_shadow(draw: ImageDraw.ImageDraw, xy, text, fnt, fill):
 
 
 def make_background(index: int, path: Path):
+    photo_path = STOCK_IMAGES[(index - 1) % len(STOCK_IMAGES)] if STOCK_IMAGES else None
+    if photo_path:
+        navy, red, _ = COLORS[index % len(COLORS)]
+        img = cover_crop(Image.open(photo_path), (W, H)).convert("RGB")
+        overlay = Image.new("RGBA", (W, H), (*navy, 92))
+        img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
+        draw = ImageDraw.Draw(img)
+        draw.rounded_rectangle((56, 72, 1024, 352), radius=34, fill=(*navy, 238), outline=red, width=4)
+        draw.text((96, 112), "ASSIGNMENT", font=font(68, True), fill=(255, 255, 255))
+        draw.text((96, 190), "NEPAL", font=font(78, True), fill=red)
+        draw.text((96, 286), "Quality assignments - on time - every time", font=font(28, True), fill=(232, 240, 255))
+        img.save(path)
+        return
+
     navy, red, light = COLORS[index % len(COLORS)]
     img = Image.new("RGB", (W, H), light)
     draw = ImageDraw.Draw(img)
@@ -119,6 +163,23 @@ def make_background(index: int, path: Path):
 
 
 def make_avatar(index: int, path: Path):
+    portrait = STOCK_PORTRAITS[(index - 1) % len(STOCK_PORTRAITS)] if STOCK_PORTRAITS else None
+    if portrait:
+        navy, red, _ = COLORS[index % len(COLORS)]
+        img = Image.new("RGBA", (430, 560), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(img)
+        draw.rounded_rectangle((18, 18, 412, 542), radius=48, fill=(*navy, 238), outline=red, width=5)
+        photo = cover_crop(Image.open(portrait), (342, 382)).convert("RGBA")
+        photo.putalpha(rounded_alpha((342, 382), 42))
+        img.alpha_composite(photo, (44, 52))
+        draw.rounded_rectangle((52, 402, 378, 514), radius=28, fill=(255, 255, 255, 238))
+        draw.text((82, 426), "Academic", font=font(32, True), fill=navy)
+        draw.text((82, 466), "Support", font=font(42, True), fill=red)
+        draw.rounded_rectangle((282, 34, 398, 94), radius=24, fill=(126, 231, 255, 245))
+        draw.text((310, 49), "A+", font=font(30, True), fill=navy)
+        img.save(path)
+        return
+
     rng = random.Random(index)
     img = Image.new("RGBA", (390, 520), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
@@ -146,18 +207,26 @@ def make_text_panel(index: int, path: Path, title: str, body: str):
     navy, red, _ = COLORS[index % len(COLORS)]
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
-    y = 1120
-    draw.rounded_rectangle((58, y, 1022, y + 260), radius=34, fill=(*navy, 235), outline=red, width=4)
-    draw.rounded_rectangle((92, y + 34, 220, y + 44), radius=5, fill=red)
+    layouts = [
+        (58, 1120, 1022, 1380),
+        (70, 1040, 1010, 1315),
+        (92, 1180, 988, 1448),
+        (58, 960, 820, 1235),
+        (250, 1115, 1022, 1395),
+    ]
+    x1, y, x2, y2 = layouts[index % len(layouts)]
+    draw.rounded_rectangle((x1, y, x2, y2), radius=34, fill=(*navy, 235), outline=red, width=4)
+    draw.rounded_rectangle((x1 + 34, y + 34, x1 + 162, y + 44), radius=5, fill=red)
     title_font = font(52, True)
     body_font = font(31, False)
     ty = y + 72
-    for line in wrap(draw, title, title_font, 860)[:2]:
-        draw_shadow(draw, (98, ty), line, title_font, (255, 255, 255, 255))
+    max_w = x2 - x1 - 120
+    for line in wrap(draw, title, title_font, max_w)[:2]:
+        draw_shadow(draw, (x1 + 42, ty), line, title_font, (255, 255, 255, 255))
         ty += 58
     ty += 8
-    for line in wrap(draw, body, body_font, 840)[:2]:
-        draw_shadow(draw, (100, ty), line, body_font, (232, 240, 255, 245))
+    for line in wrap(draw, body, body_font, max_w - 20)[:2]:
+        draw_shadow(draw, (x1 + 44, ty), line, body_font, (232, 240, 255, 245))
         ty += 42
     path.parent.mkdir(parents=True, exist_ok=True)
     img.save(path)
@@ -232,11 +301,42 @@ async def render_one(index: int, force: bool):
 
     ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
     OUT.mkdir(parents=True, exist_ok=True)
+    stock_video = STOCK_VIDEOS[(index - 1) % len(STOCK_VIDEOS)] if STOCK_VIDEOS else None
+    contrast = 1.04 + (index % 5) * 0.035
+    saturation = 1.08 + (index % 6) * 0.045
+    avatar_positions = [
+        ("690+18*sin(t*2.4)", "600+16*sin(t*2.0)"),
+        ("74+16*sin(t*2.0)", "620+14*sin(t*2.6)"),
+        ("650+24*sin(t*1.8)", "430+16*sin(t*2.8)"),
+        ("112+18*sin(t*2.2)", "430+14*sin(t*2.0)"),
+        ("575+16*sin(t*2.5)", "760+15*sin(t*1.9)"),
+    ]
+    avatar_x, avatar_y = avatar_positions[index % len(avatar_positions)]
+    if stock_video:
+        bg_filter = (
+            f"[0:v]scale=1080:1920:force_original_aspect_ratio=increase,"
+            f"crop=1080:1920,fps=30,eq=contrast={contrast:.3f}:saturation={saturation:.3f}:brightness=-0.035,"
+            "format=rgba[bg];"
+        )
+        background_input = [
+            "-stream_loop",
+            "-1",
+            "-ss",
+            str((index % 6) * 1.3),
+            "-t",
+            "20",
+            "-i",
+            str(stock_video),
+        ]
+    else:
+        bg_filter = "[0:v]scale=1080:1920,zoompan=z='min(zoom+0.0009,1.06)':d=600:s=1080x1920:fps=30[bg];"
+        background_input = ["-loop", "1", "-t", "20", "-i", str(bg)]
+
     filter_complex = (
-        "[0:v]scale=1080:1920,zoompan=z='min(zoom+0.0009,1.06)':d=600:s=1080x1920:fps=30[bg];"
-        "[1:v]format=rgba,scale=330:-1[av];"
+        bg_filter +
+        "[1:v]format=rgba,scale=350:-1[av];"
         "[2:v]format=rgba[panel];"
-        "[bg][av]overlay=x='700+22*sin(t*2.4)':y='620+18*sin(t*2.0)':enable='between(t,1,19)'[v1];"
+        f"[bg][av]overlay=x='{avatar_x}':y='{avatar_y}':enable='between(t,1,19)'[v1];"
         "[v1][panel]overlay=0:0:enable='between(t,2,18)',format=yuv420p[v];"
         "[3:a]adelay=350|350,volume=1.12[voice];"
         "[4:a]atrim=0:20,afade=t=in:st=0:d=0.8,afade=t=out:st=18.8:d=1.0,volume=0.17[music];"
@@ -248,12 +348,7 @@ async def render_one(index: int, force: bool):
         "-hide_banner",
         "-loglevel",
         "error",
-        "-loop",
-        "1",
-        "-t",
-        "20",
-        "-i",
-        str(bg),
+        *background_input,
         "-loop",
         "1",
         "-t",
