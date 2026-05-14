@@ -1,6 +1,7 @@
 import { captionForAsset } from "./captions";
 import { SLOT_CONFIG } from "./config";
-import { configuredFolderId, driveDownloadUrl, ensureAnyoneReadable, listDriveFolderAssets } from "./drive";
+import { configuredFolderId, listDriveFolderAssets } from "./drive";
+import { mediaDeliveryUrl } from "./media-url";
 import { publishToMeta } from "./meta";
 import type { CampaignAssetType, CampaignSlot, DriveAsset } from "./types";
 
@@ -42,10 +43,8 @@ export async function runSocialPublisherSlot(slot: CampaignSlot) {
   }
 
   const selected = selectAsset(slot, config.type, compatibleFiles);
-  await ensureAnyoneReadable(selected.id);
-
   const caption = captionForAsset(config.type, selected.name);
-  const mediaUrl = driveDownloadUrl(selected.id);
+  const mediaUrl = mediaDeliveryUrl(selected.id);
   const publishResult = await publishToMeta({
     type: config.type,
     mediaUrl,

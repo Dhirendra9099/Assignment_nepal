@@ -29,6 +29,7 @@ export async function GET(request: Request, context: { params: Promise<{ slot: s
     return NextResponse.json(result);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
+    console.error("Social publisher cron failed", { slot, error: message });
     return NextResponse.json({ ok: false, slot, error: message }, { status: 500 });
   }
 }
