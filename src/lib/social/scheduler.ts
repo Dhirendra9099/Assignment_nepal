@@ -1,4 +1,5 @@
 import { captionForAsset } from "./captions";
+import { selectCollegeCampaignAsset } from "./college-campaign";
 import { SLOT_CONFIG } from "./config";
 import { configuredFolderId, listDriveFolderAssets } from "./drive";
 import { mediaDeliveryUrl } from "./media-url";
@@ -25,6 +26,27 @@ function selectAsset(slot: CampaignSlot, type: CampaignAssetType, files: DriveAs
 
 export async function runSocialPublisherSlot(slot: CampaignSlot) {
   const config = SLOT_CONFIG[slot];
+  const campaignAsset = config.type === "poster" ? selectCollegeCampaignAsset(slot) : null;
+
+  if (campaignAsset) {
+    const caption = captionForAsset(config.type, campaignAsset.name);
+    const publishResult = await publishToMeta({
+      type: config.type,
+      mediaUrl: campaignAsset.mediaUrl,
+      caption,
+    });
+
+    return {
+      ok: true,
+      slot,
+      type: config.type,
+      source: "college-campaign",
+      file: campaignAsset.name,
+      facebookPostId: publishResult.facebookId,
+      instagramMediaId: publishResult.instagramMediaId,
+    };
+  }
+
   const folderId = configuredFolderId(config.folderEnv);
   const files = await listDriveFolderAssets(folderId);
 

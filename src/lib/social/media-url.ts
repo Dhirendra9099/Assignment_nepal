@@ -21,7 +21,7 @@ export function isValidMediaSignature(fileId: string, signature: string | null) 
   return timingSafeEqual(signatureBuffer, expectedBuffer);
 }
 
-function productionBaseUrl() {
+export function productionBaseUrl() {
   const configured = process.env.APP_URL;
   if (configured) return configured.replace(/\/$/, "");
 
@@ -34,4 +34,8 @@ function productionBaseUrl() {
 export function mediaDeliveryUrl(fileId: string) {
   const signature = mediaSignature(fileId);
   return `${productionBaseUrl()}/api/social-media/${encodeURIComponent(fileId)}?sig=${signature}`;
+}
+
+export function publicAssetUrl(path: string) {
+  return `${productionBaseUrl()}/${path.replace(/^\/+/, "")}`;
 }
